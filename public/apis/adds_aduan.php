@@ -1,8 +1,10 @@
 <?php
 require_once 'includes/Constants.php';
 class emp{}
+$txt_id = $_POST['txt_id'];
 $image = $_POST['image'];
 $name = $_POST['name'];
+
 	
 	$random = random_word(20);
 	    $file_ext = ".png";
@@ -14,7 +16,7 @@ $name = $_POST['name'];
 
 
 $response = array();
-$query = mysqli_query($con, "INSERT INTO aduans_file (file_path,file_name,file_ext,name) VALUES ('$path','$file_name','$file_ext','$name')");
+$query = mysqli_query($con, "INSERT INTO aduans_file (aduan_id,file_path,file_name,file_ext,name) VALUES ($txt_id,'$path','$file_name','$file_ext','$name')");
 
 
 
