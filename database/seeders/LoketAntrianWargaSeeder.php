@@ -18,21 +18,6 @@ class LoketAntrianWargaSeeder extends Seeder
      */
     public function run()
     {
-        Warga::create([
-            'desa_id' => 1,
-            'kecamatan_id' => 1,
-            'kabupaten_id' => 1,
-            'nik' => '11806634',
-            'nama_warga' => 'Ichsan Arrizqi',
-            'jenis_kelamin' => 'Laki-Laki',
-            'tempat_lahir' => 'Bogor',
-            'tanggal_lahir' => '1998-08-25',
-            'agama' => 'islam',
-            'pendidikan' => 'Sekolah Menengah Kejuruan',
-            'pekerjaan' => 'programmer',
-            'alamat' => 'kp.pos bojonggede',
-            'warga_negara' => 'indonesia',
-        ]);
         Loket::create([
             'desa_id' => 1,
             'nama' => 'a',
