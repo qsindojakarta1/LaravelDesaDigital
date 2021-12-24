@@ -2490,7 +2490,7 @@ class CetakSuratController extends Controller
 
             $templateProcessor->setValues($array);
             // dd(asset('storage/'.Desa::find(auth()->user()->desa_id)->logo));
-            $templateProcessor->setImageValue('logo', array('path' => public_path('storage/' . Desa::find(auth()->user()->desa_id)->logo), 'width' => 50, 'height' => 50, 'ratio' => false));
+            $templateProcessor->setImageValue('logo', array('path' => public_path('storage/' . Desa::find(auth()->user()->desa_id)->logo), 'width' => 100, 'height' => 100, 'ratio' => false));
             header('Content-Disposition: attachment; filename=' . $nama_file);
 
             $templateProcessor->saveAs('php://output');
