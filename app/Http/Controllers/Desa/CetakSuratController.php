@@ -9,6 +9,7 @@ use App\Models\JenisSurat;
 use App\Models\PengajuanWarga;
 use App\Models\PermohonanSurat;
 use App\Models\PermohonanSuratBedaIdentitas;
+use App\Models\PermohonanSuratBelumMenikah;
 use App\Models\PermohonanSuratDomisiliUsaha;
 use App\Models\PermohonanSuratIzinKeramaian;
 use App\Models\PermohonanSuratJalan;
@@ -110,7 +111,7 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -158,7 +159,7 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -213,7 +214,7 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -265,8 +266,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -411,8 +412,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -463,8 +464,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -517,8 +518,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -573,7 +574,7 @@ class CetakSuratController extends Controller
                     'd_nama_ayah' => $ayah->nama_warga,
                     'd_nik_ayah' => $ayah->nik,
                     'd_tempatlahir_ayah' => $ayah->tempat_lahir,
-                    'd_tanggallahir_ayah' => Carbon::parse($ayah->tanggal_lahir)->format('d F Y'),
+                    'd_tanggallahir_ayah' => Carbon::parse($ayah->tanggal_lahir)->translatedFormat('d F Y'),
                     'd_agama_ayah' => $ayah->agama,
                     'd_pekerjaan_ayah' => $ayah->pekerjaan,
                     'hasil_ayah' => number_format($request->penghasilan_ayah)
@@ -582,7 +583,7 @@ class CetakSuratController extends Controller
                     'd_nama_ibu' => $ibu->nama_warga,
                     'd_nik_ibu' => $ibu->nik,
                     'd_tempatlahir_ibu' => $ibu->tempat_lahir,
-                    'd_tanggallahir_ibu' => Carbon::parse($ibu->tanggal_lahir)->format('d F Y'),
+                    'd_tanggallahir_ibu' => Carbon::parse($ibu->tanggal_lahir)->translatedFormat('d F Y'),
                     'd_agama_ibu' => $ibu->agama,
                     'd_pekerjaan_ibu' => $ibu->pekerjaan,
                     'hasil_ibu' => number_format($request->penghasilan_ibu)
@@ -606,8 +607,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'tempat_tgl_lahir' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'tempat_tgl_lahir' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -667,8 +668,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -725,8 +726,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -763,8 +764,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -836,8 +837,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -852,8 +853,8 @@ class CetakSuratController extends Controller
                         'orangtua_ibu_id' => $request->orangtua_ibu_id,
                         'form_nama_bayi' => $request->nama_anak,
                         'form_nama_sex' => $request->jenis_kelamin_anak,
-                        'form_hari' => Carbon::parse($request->tanggal_lahir_anak)->format('l'),
-                        'form_tanggallahir' => Carbon::parse($request->tanggal_anak)->format('Y F d'),
+                        'form_hari' => Carbon::parse($request->tanggal_lahir_anak)->translatedFormat('l'),
+                        'form_tanggallahir' => Carbon::parse($request->tanggal_anak)->translatedFormat('Y F d'),
                         'form_waktu_lahir' => $request->pukul_lahir_anak,
                         'form_tempatlahir' => $request->tempat_lahir_anak,
                         'form_kelahiran_anak_ke' => $request->anak_ke,
@@ -861,7 +862,7 @@ class CetakSuratController extends Controller
                         'form_nama_ibu' => $ibu->nama_warga,
 
                         'nik_ibu' => $ibu->nik,
-                        'umur_ibu' => Carbon::now()->format('Y') - Carbon::parse($ibu->tanggal_lahir)->format('Y'),
+                        'umur_ibu' => Carbon::now()->translatedFormat('Y') - Carbon::parse($ibu->tanggal_lahir)->translatedFormat('Y'),
                         'pekerjaanibu' => $ibu->pekerjaan,
                         'alamat_ibu' => $ibu->alamat,
                         'desaibu' => $ibu->desa->nama_desa,
@@ -872,7 +873,7 @@ class CetakSuratController extends Controller
 
                         'form_nama_ayah' => $ayah->nama_warga,
                         'nik_ayah' => $ayah->nik,
-                        'umur_ayah' => Carbon::now()->format('Y') - Carbon::parse($ayah->tanggal_lahir)->format('Y'),
+                        'umur_ayah' => Carbon::now()->translatedFormat('Y') - Carbon::parse($ayah->tanggal_lahir)->translatedFormat('Y'),
                         'pekerjaanayah' => $ayah->pekerjaan,
                         'alamat_ayah' => $ayah->alamat,
                         'desaayah' => $ayah->desa->nama_desa,
@@ -881,7 +882,7 @@ class CetakSuratController extends Controller
 
                         'form_nama_pelapor' => $pelapor->nama_warga,
                         'form_nik_pelapor' => $pelapor->nik,
-                        'form_umur_pelapor' => Carbon::now()->format('Y') - Carbon::parse($pelapor->tanggal_lahir)->format('Y'),
+                        'form_umur_pelapor' => Carbon::now()->translatedFormat('Y') - Carbon::parse($pelapor->tanggal_lahir)->translatedFormat('Y'),
                         'form_pekerjaanpelapor' => $pelapor->pekerjaan,
                         'form_desapelapor' => $pelapor->desa->nama_desa,
                         'form_kecpelapor' => $pelapor->desa->kecamatan->nama_kecamatan,
@@ -891,10 +892,10 @@ class CetakSuratController extends Controller
 
                         'nama_pelapor' => $pelapor->nama_warga,
                         'nik_pelapor' => $pelapor->nik,
-                        'umur_pelapor' => Carbon::now()->format('Y') - Carbon::parse($pelapor->tanggal_lahir)->format('Y'),
+                        'umur_pelapor' => Carbon::now()->translatedFormat('Y') - Carbon::parse($pelapor->tanggal_lahir)->translatedFormat('Y'),
                         'pekerjaanpelapor' => $pelapor->pekerjaan,
                         'tempat_lahir_pelapor' => $pelapor->tempat_lahir,
-                        'tanggal_lahir_pelapor' => Carbon::parse($pelapor->tanggal_lahir)->format('d F Y'),
+                        'tanggal_lahir_pelapor' => Carbon::parse($pelapor->tanggal_lahir)->translatedFormat('d F Y'),
                         'desapelapor' => $pelapor->desa->nama_desa,
                         'kecpelapor' => $pelapor->desa->kecamatan->nama_kecamatan,
                         'kabpelapor' => $pelapor->desa->kecamatan->kabupaten->nama_kabupaten,
@@ -906,7 +907,7 @@ class CetakSuratController extends Controller
                         'nik_saksi1' => $saksi_satu->nik ?? 'Kosong',
                         'tempat_lahir_saksi1' => $saksi_satu->tempat_lahir ?? 'Kosong',
                         'tanggal_lahir_saksi1' => $saksi_satu->tanggal_lahir ?? 'Kosong',
-                        'umur_saksi1' => Carbon::now()->format('Y') - Carbon::parse($saksi_satu->tanggal_lahir ?? Carbon::now()->format('Y'))->format('Y'),
+                        'umur_saksi1' => Carbon::now()->translatedFormat('Y') - Carbon::parse($saksi_satu->tanggal_lahir ?? Carbon::now()->translatedFormat('Y'))->translatedFormat('Y'),
                         'pekerjaansaksi1' => $saksi_satu->pekerjaan ?? 'Kosong',
                         'form_desasaksi1' => $saksi_satu->desa->nama_desa ?? 'Kosong',
                         'form_kecsaksi1' => $saksi_satu->desa->kecamatan->nama_kecamatan ?? 'Kosong',
@@ -917,7 +918,7 @@ class CetakSuratController extends Controller
                         'nik_saksi2' => $saksi_dua->nik ?? 'Kosong',
                         'tempat_lahir_saksi2' => $saksi_dua->tempat_lahir ?? 'Kosong',
                         'tanggal_lahir_saksi2' => $saksi_dua->tanggal_lahir ?? 'Kosong',
-                        'umur_saksi2' => Carbon::now()->format('Y') - Carbon::parse($saksi_dua->tanggal_lahir ?? Carbon::now()->format('Y'))->format('Y'),
+                        'umur_saksi2' => Carbon::now()->translatedFormat('Y') - Carbon::parse($saksi_dua->tanggal_lahir ?? Carbon::now()->translatedFormat('Y'))->translatedFormat('Y'),
                         'pekerjaansaksi2' => $saksi_dua->pekerjaan ?? 'Kosong',
                         'form_desasaksi2' => $saksi_dua->desa->nama_desa ?? 'Kosong',
                         'form_kecsaksi2' => $saksi_dua->desa->kecamatan->nama_kecamatan ?? 'Kosong',
@@ -967,8 +968,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1010,7 +1011,48 @@ class CetakSuratController extends Controller
                 }
                 break;
             case 15:
-                abort(404);
+                $doc = '15_surat_ket_belum_menikah';
+                dd($request->all());
+                try {
+                    PermohonanSuratBelumMenikah::create([
+                        'permohonan_surat_id' => $permohonan_surat_id->id,
+                        'keperluan' => $request->keperluan
+                    ]);
+                    $body = [
+                        'nama' => $warga->nama_warga,
+                        'no_ktp' => $warga->nik,
+                        'no_kk' => $warga->kk,
+                        'kepala_kk' => $warga->nama_warga,
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
+                        'agama' => $warga->agama,
+                        'sex' => $warga->jenis_kelamin,
+                        'alamat' => $warga->desa->alamat,
+                        'status' => $warga->status,
+                        'agama' => $warga->agama,
+                        'pendidikan' => $warga->pendidikan,
+                        'pekerjaan' => $warga->pekerjaan,
+                        'warga_negara' => $warga->warga_negara,
+                    ];
+
+                    $array = array_merge(
+                        $this->header($warga, [
+                            'judul_surat' => 'Permohonan Surat Ganti Identitas',
+                            'nomor_surat' => '12312321'
+                        ]),
+                        $body,
+                        $this->footer([
+                            'kode_desa' => $warga->desa->id,
+                            'kode_surat' => '1010110'
+                        ])
+                    );
+                    DB::commit();
+                } catch (\Throwable $th) {
+                    dd($th->getMessage());
+                    DB::rollBack();
+                    Alert::error($th->getMessage());
+                    return back();
+                }
                 break;
             case 16:
                 $doc = '16_surat_ket_beda_nama';
@@ -1033,8 +1075,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1095,8 +1137,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1232,7 +1274,7 @@ class CetakSuratController extends Controller
                     $table = 'permohonan_surat_jual_belis';
                     break;
                 case 15:
-                    abort(404);
+                    $table = 'permohonan_surat_belum_menikahs';
                     break;
                 case 16:
                     $table = 'permohonan_surat_beda_identitas';
@@ -1279,7 +1321,7 @@ class CetakSuratController extends Controller
                     $table = 'permohonan_surat_pergi_kawins';
                     break;
                 case 9:
-                    $table = '';
+                    $table = 'permohonan_surat_penghasilans';
                     break;
                 case 10:
                     $table = 'permohonan_surat_jaminan_kesehatans';
@@ -1297,7 +1339,7 @@ class CetakSuratController extends Controller
                     $table = 'permohonan_surat_jual_belis';
                     break;
                 case 15:
-                    abort(404);
+                    $table = 'permohonan_surat_belum_menikahs';
                     break;
                 case 16:
                     $table = 'permohonan_surat_beda_identitas';
@@ -1306,7 +1348,7 @@ class CetakSuratController extends Controller
                     $table = 'permohonan_surat_jalans';
                     break;
                 default:
-                    $table = '';
+                    abort(404);
                     break;
             }
             return view('desa.cetak_surat.edit', [
@@ -1376,7 +1418,7 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1424,7 +1466,7 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1478,7 +1520,7 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1533,8 +1575,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1687,8 +1729,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1739,8 +1781,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1793,8 +1835,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1849,7 +1891,7 @@ class CetakSuratController extends Controller
                     'd_nama_ayah' => $ayah->nama_warga,
                     'd_nik_ayah' => $ayah->nik,
                     'd_tempatlahir_ayah' => $ayah->tempat_lahir,
-                    'd_tanggallahir_ayah' => Carbon::parse($ayah->tanggal_lahir)->format('d F Y'),
+                    'd_tanggallahir_ayah' => Carbon::parse($ayah->tanggal_lahir)->translatedFormat('d F Y'),
                     'd_agama_ayah' => $ayah->agama,
                     'd_pekerjaan_ayah' => $ayah->pekerjaan,
                     'hasil_ayah' => number_format($request->penghasilan_ayah)
@@ -1858,7 +1900,7 @@ class CetakSuratController extends Controller
                     'd_nama_ibu' => $ibu->nama_warga,
                     'd_nik_ibu' => $ibu->nik,
                     'd_tempatlahir_ibu' => $ibu->tempat_lahir,
-                    'd_tanggallahir_ibu' => Carbon::parse($ibu->tanggal_lahir)->format('d F Y'),
+                    'd_tanggallahir_ibu' => Carbon::parse($ibu->tanggal_lahir)->translatedFormat('d F Y'),
                     'd_agama_ibu' => $ibu->agama,
                     'd_pekerjaan_ibu' => $ibu->pekerjaan,
                     'hasil_ibu' => number_format($request->penghasilan_ibu)
@@ -1882,8 +1924,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'tempat_tgl_lahir' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'tempat_tgl_lahir' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -1943,8 +1985,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -2001,8 +2043,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -2039,8 +2081,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -2112,8 +2154,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -2128,8 +2170,8 @@ class CetakSuratController extends Controller
                         'orangtua_ibu_id' => $request->orangtua_ibu_id,
                         'form_nama_bayi' => $request->nama_anak,
                         'form_nama_sex' => $request->jenis_kelamin_anak,
-                        'form_hari' => Carbon::parse($request->tanggal_lahir_anak)->format('l'),
-                        'form_tanggallahir' => Carbon::parse($request->tanggal_anak)->format('Y F d'),
+                        'form_hari' => Carbon::parse($request->tanggal_lahir_anak)->translatedFormat('l'),
+                        'form_tanggallahir' => Carbon::parse($request->tanggal_anak)->translatedFormat('Y F d'),
                         'form_waktu_lahir' => $request->pukul_lahir_anak,
                         'form_tempatlahir' => $request->tempat_lahir_anak,
                         'form_kelahiran_anak_ke' => $request->anak_ke,
@@ -2137,7 +2179,7 @@ class CetakSuratController extends Controller
                         'form_nama_ibu' => $ibu->nama_warga,
 
                         'nik_ibu' => $ibu->nik,
-                        'umur_ibu' => Carbon::now()->format('Y') - Carbon::parse($ibu->tanggal_lahir)->format('Y'),
+                        'umur_ibu' => Carbon::now()->translatedFormat('Y') - Carbon::parse($ibu->tanggal_lahir)->translatedFormat('Y'),
                         'pekerjaanibu' => $ibu->pekerjaan,
                         'alamat_ibu' => $ibu->alamat,
                         'desaibu' => $ibu->desa->nama_desa,
@@ -2148,7 +2190,7 @@ class CetakSuratController extends Controller
 
                         'form_nama_ayah' => $ayah->nama_warga,
                         'nik_ayah' => $ayah->nik,
-                        'umur_ayah' => Carbon::now()->format('Y') - Carbon::parse($ayah->tanggal_lahir)->format('Y'),
+                        'umur_ayah' => Carbon::now()->translatedFormat('Y') - Carbon::parse($ayah->tanggal_lahir)->translatedFormat('Y'),
                         'pekerjaanayah' => $ayah->pekerjaan,
                         'alamat_ayah' => $ayah->alamat,
                         'desaayah' => $ayah->desa->nama_desa,
@@ -2157,7 +2199,7 @@ class CetakSuratController extends Controller
 
                         'form_nama_pelapor' => $pelapor->nama_warga,
                         'form_nik_pelapor' => $pelapor->nik,
-                        'form_umur_pelapor' => Carbon::now()->format('Y') - Carbon::parse($pelapor->tanggal_lahir)->format('Y'),
+                        'form_umur_pelapor' => Carbon::now()->translatedFormat('Y') - Carbon::parse($pelapor->tanggal_lahir)->translatedFormat('Y'),
                         'form_pekerjaanpelapor' => $pelapor->pekerjaan,
                         'form_desapelapor' => $pelapor->desa->nama_desa,
                         'form_kecpelapor' => $pelapor->desa->kecamatan->nama_kecamatan,
@@ -2167,10 +2209,10 @@ class CetakSuratController extends Controller
 
                         'nama_pelapor' => $pelapor->nama_warga,
                         'nik_pelapor' => $pelapor->nik,
-                        'umur_pelapor' => Carbon::now()->format('Y') - Carbon::parse($pelapor->tanggal_lahir)->format('Y'),
+                        'umur_pelapor' => Carbon::now()->translatedFormat('Y') - Carbon::parse($pelapor->tanggal_lahir)->translatedFormat('Y'),
                         'pekerjaanpelapor' => $pelapor->pekerjaan,
                         'tempat_lahir_pelapor' => $pelapor->tempat_lahir,
-                        'tanggal_lahir_pelapor' => Carbon::parse($pelapor->tanggal_lahir)->format('d F Y'),
+                        'tanggal_lahir_pelapor' => Carbon::parse($pelapor->tanggal_lahir)->translatedFormat('d F Y'),
                         'desapelapor' => $pelapor->desa->nama_desa,
                         'kecpelapor' => $pelapor->desa->kecamatan->nama_kecamatan,
                         'kabpelapor' => $pelapor->desa->kecamatan->kabupaten->nama_kabupaten,
@@ -2182,7 +2224,7 @@ class CetakSuratController extends Controller
                         'nik_saksi1' => $saksi_satu->nik ?? 'Kosong',
                         'tempat_lahir_saksi1' => $saksi_satu->tempat_lahir ?? 'Kosong',
                         'tanggal_lahir_saksi1' => $saksi_satu->tanggal_lahir ?? 'Kosong',
-                        'umur_saksi1' => Carbon::now()->format('Y') - Carbon::parse($saksi_satu->tanggal_lahir ?? Carbon::now()->format('Y'))->format('Y'),
+                        'umur_saksi1' => Carbon::now()->translatedFormat('Y') - Carbon::parse($saksi_satu->tanggal_lahir ?? Carbon::now()->translatedFormat('Y'))->translatedFormat('Y'),
                         'pekerjaansaksi1' => $saksi_satu->pekerjaan ?? 'Kosong',
                         'form_desasaksi1' => $saksi_satu->desa->nama_desa ?? 'Kosong',
                         'form_kecsaksi1' => $saksi_satu->desa->kecamatan->nama_kecamatan ?? 'Kosong',
@@ -2193,7 +2235,7 @@ class CetakSuratController extends Controller
                         'nik_saksi2' => $saksi_dua->nik ?? 'Kosong',
                         'tempat_lahir_saksi2' => $saksi_dua->tempat_lahir ?? 'Kosong',
                         'tanggal_lahir_saksi2' => $saksi_dua->tanggal_lahir ?? 'Kosong',
-                        'umur_saksi2' => Carbon::now()->format('Y') - Carbon::parse($saksi_dua->tanggal_lahir ?? Carbon::now()->format('Y'))->format('Y'),
+                        'umur_saksi2' => Carbon::now()->translatedFormat('Y') - Carbon::parse($saksi_dua->tanggal_lahir ?? Carbon::now()->translatedFormat('Y'))->translatedFormat('Y'),
                         'pekerjaansaksi2' => $saksi_dua->pekerjaan ?? 'Kosong',
                         'form_desasaksi2' => $saksi_dua->desa->nama_desa ?? 'Kosong',
                         'form_kecsaksi2' => $saksi_dua->desa->kecamatan->nama_kecamatan ?? 'Kosong',
@@ -2243,8 +2285,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $request->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -2309,8 +2351,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -2371,8 +2413,8 @@ class CetakSuratController extends Controller
                         'no_ktp' => $warga->nik,
                         'no_kk' => $warga->kk,
                         'kepala_kk' => $warga->nama_warga,
-                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->format('d F Y'),
-                        'usia' => Carbon::now()->format('Y') - Carbon::parse($warga->tanggal_lahir)->format('Y'),
+                        'ttl' => $warga->tempat_lahir . '/' . Carbon::parse($warga->tanggal_lahir)->translatedFormat('d F Y'),
+                        'usia' => Carbon::now()->translatedFormat('Y') - Carbon::parse($warga->tanggal_lahir)->translatedFormat('Y'),
                         'agama' => $warga->agama,
                         'sex' => $warga->jenis_kelamin,
                         'alamat' => $warga->desa->alamat,
@@ -2416,7 +2458,7 @@ class CetakSuratController extends Controller
 
         $nama_file = $doc . '.docx';
         // dd($file);
-        
+
         if ($doc == '11_surat_ket_kurang_mampu') {
             $fams = [];
             foreach ($families as $key => $value) {
@@ -2489,7 +2531,7 @@ class CetakSuratController extends Controller
         return [
             'kode_desa' => $surat['kode_desa'],
             'kode_surat' => $surat['kode_surat'],
-            'tgl_surat' => Carbon::now()->format('d m Y'),
+            'tgl_surat' => Carbon::now()->translatedFormat('d m Y'),
             'nama_pamong' => auth()->user()->name,
             'pamong_nip' => auth()->user()->id,
             'jabatan' => auth()->user()->roles()->first()->name
