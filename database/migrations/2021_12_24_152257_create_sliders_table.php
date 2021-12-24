@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSubDomainToDesasTable extends Migration
+class CreateSlidersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddSubDomainToDesasTable extends Migration
      */
     public function up()
     {
-        Schema::table('desas', function (Blueprint $table) {
-            $table->string('sub_domain')->after('alamat')->nullable();
+        Schema::create('sliders', function (Blueprint $table) {
+            $table->id();
+            $table->string('thumbnail');
+            $table->string('link');
+            $table->string('teks');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddSubDomainToDesasTable extends Migration
      */
     public function down()
     {
-        Schema::table('desas', function (Blueprint $table) {
-            $table->dropColumn('sub_domain');
-        });
+        Schema::dropIfExists('sliders');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDesasTable extends Migration
+class CreatePermohonanSuratBelumMenikahsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDesasTable extends Migration
      */
     public function up()
     {
-        Schema::create('desas', function (Blueprint $table) {
+        Schema::create('permohonan_surat_belum_menikahs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kecamatan_id')->constrained('kecamatans');
-            $table->string('nama_desa');
-            $table->string('sub_domain')->nullable();
+            $table->foreignId('permohonan_surat_id')->constrained('permohonan_surats');
+            $table->string('keperluan');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateDesasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desas');
+        Schema::dropIfExists('permohonan_surat_belum_menikahs');
     }
 }
