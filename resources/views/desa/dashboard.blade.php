@@ -141,7 +141,8 @@
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
                     auth: $('#auth').val()
@@ -183,7 +184,8 @@
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
                     auth: $('#auth').val()
@@ -225,7 +227,8 @@
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
                     auth: $('#auth').val()
@@ -267,7 +270,8 @@
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
                     auth: $('#auth').val()
@@ -309,7 +313,8 @@
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
                     auth: $('#auth').val()
@@ -351,7 +356,8 @@
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
                     auth: $('#auth').val()
@@ -392,7 +398,8 @@
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             body: JSON.stringify({
                 auth: $('#auth').val()
@@ -442,7 +449,8 @@
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             body: JSON.stringify({
                 auth: $('#auth').val()
