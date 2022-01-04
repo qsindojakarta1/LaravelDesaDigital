@@ -57,3 +57,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/select2/cetaksurat',[DevController::class,'getcetaksurat']);
 Route::get('/select2/cetaksurat/{id}',[DevController::class,'showcetaksurat']);
 Route::get('/select2/findfamily/{id}',[DevController::class,'getfindfamily']);
+
+Route::post('agama',[DevController::class, 'agama']);
+Route::post('suku',[DevController::class, 'suku']);
+Route::post('golongandarah',[DevController::class,'golongandarah']);
+Route::post('statusperkawinan',[DevController::class,'statusperkawinan']);
+Route::post('pendidikan',[DevController::class,'pendidikan']);
+Route::post('pekerjaan',[DevController::class,'pekerjaan']);
+Route::post('umur',[DevController::class,'umur']);
+Route::post('dusun',[DevController::class,'dusun']);

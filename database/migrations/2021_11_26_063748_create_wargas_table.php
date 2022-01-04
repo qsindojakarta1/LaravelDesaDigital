@@ -25,14 +25,15 @@ class CreateWargasTable extends Migration
             $table->enum('jenis_kelamin', ['Laki-Laki', 'Perempuan']);
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->enum('agama',['Islam', 'Kristen', 'Katolik', 'Hindu','Buddha','Konghucu', 'Dll'])->nullable();
-            $table->string('pekerjaan')->nullable();
-            $table->string('pendidikan')->nullable();
             $table->string('alamat')->nullable();
             $table->string('warga_negara')->nullable();
-            $table->enum('status_pernikahan',['Belum Menikah', 'Menikah','-'])->nullable();
-            $table->enum('golongan_darah',['A','B','O','AB','-'])->nullable();
             $table->string('status')->nullable()->default('ada');
+            $table->foreignId('agama_id')->constrained('agamas');
+            $table->foreignId('pendidikan_id')->constrained('pendidikans');
+            $table->foreignId('pekerjaan_id')->constrained('pekerjaans');
+            $table->foreignId('status_perkawinan_id')->constrained('status_perkawinans');
+            $table->foreignId('suku_id')->constrained('sukus');
+            $table->foreignId('golongan_darah_id')->constrained('golongan_darahs');
             $table->timestamps();
         });
     }

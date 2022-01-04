@@ -19,7 +19,7 @@ class WargaController extends Controller
      */
     public function index()
     {
-        $wargas = Warga::orderBy('created_at', 'desc')->where('desa_id',auth()->user()->desa_id)->get();
+        $wargas = Warga::orderBy('created_at', 'desc')->where('desa_id', auth()->user()->desa_id)->get();
         return view('desa.warga.index', [
             'wargas' => $wargas
         ]);
@@ -50,25 +50,30 @@ class WargaController extends Controller
     {
         $attr = $this->validate($request, [
             'nik' => 'required',
+            'kk' => 'required',
             'nama_warga' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+            'warga_negara' => 'required',
             'desa_id' => 'required',
             'kecamatan_id' => 'required',
             'kabupaten_id' => 'required',
-            'agama' => 'required',
-            'pekerjaan' => 'required',
-            'pendidikan' => 'required',
-            'alamat' => 'required',
-            'warga_negara' => 'required',
-            'status_pernikahan' => 'required',
-            'golongan_darah' => 'required',
-            'kk' => 'required',
+            'agama_id' => 'required',
+            'suku_id' => 'required',
+            'pekerjaan_id' => 'required',
+            'pendidikan_id' => 'required',
+            'status_perkawinan_id' => 'required',
+            'golongan_darah_id' => 'required',
         ]);
-        Warga::create($attr);
-        Alert::success('success');
-        return back();
+        try {
+            Warga::create($attr);
+            Alert::success('success');
+            return back();
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 
     /**
@@ -109,25 +114,30 @@ class WargaController extends Controller
     {
         $attr = $this->validate($request, [
             'nik' => 'required',
+            'kk' => 'required',
             'nama_warga' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'alamat' => 'required',
+            'warga_negara' => 'required',
             'desa_id' => 'required',
             'kecamatan_id' => 'required',
             'kabupaten_id' => 'required',
-            'agama' => 'required',
-            'pekerjaan' => 'required',
-            'pendidikan' => 'required',
-            'alamat' => 'required',
-            'warga_negara' => 'required',
-            'status_pernikahan' => 'required',
-            'golongan_darah' => 'required',
-            'kk' => 'required',
+            'agama_id' => 'required',
+            'suku_id' => 'required',
+            'pekerjaan_id' => 'required',
+            'pendidikan_id' => 'required',
+            'status_perkawinan_id' => 'required',
+            'golongan_darah_id' => 'required',
         ]);
-        Warga::findOrFail($id)->update($attr);
-        Alert::success('success');
-        return back();
+        try {
+            Warga::findOrFail($id)->update($attr);
+            Alert::success('success');
+            return back();
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 
     /**

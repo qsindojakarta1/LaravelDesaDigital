@@ -33,17 +33,17 @@ class Warga extends Model
         return $values;
     }
 
-    public static function getAgama()
-    {
-        $agama = DB::select(DB::raw('SHOW COLUMNS FROM wargas WHERE Field = "agama"'))[0]->Type;
-        preg_match('/^enum\((.*)\)$/', $agama, $matches);
-        $values = [];
-        foreach (explode(',', $matches[1]) as $value) {
-            $values[] = trim($value, "'");
-        }
+    // public static function getAgama()
+    // {
+    //     $agama = DB::select(DB::raw('SHOW COLUMNS FROM wargas WHERE Field = "agama"'))[0]->Type;
+    //     preg_match('/^enum\((.*)\)$/', $agama, $matches);
+    //     $values = [];
+    //     foreach (explode(',', $matches[1]) as $value) {
+    //         $values[] = trim($value, "'");
+    //     }
 
-        return $values;
-    }
+    //     return $values;
+    // }
 
     public function desa()
     {
@@ -68,4 +68,29 @@ class Warga extends Model
     {
         return $this->hasMany(Aduan::class);
     }
+    public function agama()
+    {
+        return $this->belongsTo(Agama::class);
+    }
+    public function golongan_darah()
+    {
+        return $this->belongsTo(GolonganDarah::class);
+    }
+    public function pekerjaan()
+    {
+        return $this->belongsTo(Pekerjaan::class);
+    }
+    public function pendidikan()
+    {
+        return $this->belongsTo(Pendidikan::class);
+    }
+    public function status_perkawinan()
+    {
+        return $this->belongsTo(StatusPerkawinan::class);
+    }
+    public function suku()
+    {
+        return $this->belongsTo(Suku::class);
+    }
+    
 }

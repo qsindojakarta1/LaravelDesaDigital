@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Desa;
 use App\Models\Kecamatan;
+use App\Models\StatusPerkawinan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -37,7 +38,13 @@ class DatabaseSeeder extends Seeder
         $this->call(RolePermissionSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(JenisSuratSeeder::class);
-        \App\Models\Warga::factory(10)->create();
+        $this->call(AgamaSeeder::class);
+        $this->call(GolonganDarahSeeder::class);
+        $this->call(PekerjaanSeeder::class);
+        $this->call(PendidikanSeeder::class);
+        $this->call(StatusPerkawinanSeeder::class);
+        $this->call(SukuSeeder::class);
+        \App\Models\Warga::factory(300)->create();
         $this->call(LoketAntrianWargaSeeder::class);
     }
 }

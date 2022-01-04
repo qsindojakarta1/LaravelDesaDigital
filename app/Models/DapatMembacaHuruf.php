@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PermohonanSuratBelumMenikah extends Model
+class DapatMembacaHuruf extends Model
 {
     use HasFactory;
-    protected $guarded = [];
 }
