@@ -1,15 +1,48 @@
-@extends('layouts.landing', ['title' => $title])
+@extends('layouts.landing', ['title' => $desa->nama_desa])
 
 @section('content')
-<div class="container-fluid bg-secondary rounded mt-5 p-5">
-    <div class="row">
-        <div class="col-md-12 text-light">
-            <h1>Welcome to Desa Digital </h1>
-            <hr>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit porro accusamus quo accusantium impedit recusandae commodi rerum. Officia aspernatur quam rerum tempore. Delectus excepturi possimus debitis! Iure neque aperiam repudiandae cupiditate debitis ex, similique nemo, sequi vero iusto exercitationem eum id quidem esse odio libero labore nostrum cumque dignissimos cum eos odit aspernatur qui et? Cupiditate, reiciendis. Autem laudantium maxime veritatis dignissimos saepe numquam earum tenetur! Culpa quam voluptatum facilis dicta itaque tenetur provident reiciendis dolores eum aliquam. Laboriosam ipsam minima modi a sed inventore magni quaerat! Consectetur iusto hic repudiandae porro facilis! Distinctio, porro voluptate. Ratione eos excepturi libero!
-            </p>
+<!-- Start Slider
+		============================================= -->
+<div class="hero-section hero-slider owl-carousel owl-theme">
+    <div class="hero-single swiper-slide" style="background-image: url(assets/img/header/2440x1578.png)">
+        <div class="container">
+            <div class="hero-content">
+                <span class="sub-title">Start to learning today</span>
+                <h2 class="hero-title">
+                    Meet Our quality Teacher
+                    <br />
+                    <span>in Edumi </span>
+                </h2>
+                <a href="#" class="btn-1">Read More</a>
+            </div>
+        </div>
+    </div>
+    <div class="hero-single swiper-slide" style="background-image: url(assets/img/header/2440x1578.png)">
+        <div class="container">
+            <div class="hero-content">
+                <span class="sub-title">Start to learning today</span>
+                <h2 class="hero-title">
+                    Meet Our quality Teacher
+                    <br />
+                    <span>in Edumi </span>
+                </h2>
+                <a href="#" class="btn-1">Read More</a>
+            </div>
+        </div>
+    </div>
+    <div class="hero-single swiper-slide" style="background-image: url(assets/img/header/2440x1578.png)">
+        <div class="container">
+            <div class="hero-content">
+                <span class="sub-title">Start to learning today</span>
+                <h2 class="hero-title">
+                    Meet Our quality Teacher
+                    <br />
+                    <span>in Edumi </span>
+                </h2>
+                <a href="#" class="btn-1">Read More</a>
+            </div>
         </div>
     </div>
 </div>
+<!-- End Slider -->
 @stop

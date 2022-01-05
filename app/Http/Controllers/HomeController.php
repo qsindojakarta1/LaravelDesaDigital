@@ -19,13 +19,13 @@ use RealRashid\SweetAlert\Facades\Alert;
 class HomeController extends Controller
 {
     public function index()
-    {   
+    {
         $url = url()->current();
         $url = explode('/', $url);
-        $desa = Desa::where('sub_domain', $url[2])->firstOrFail();
-        $title = $desa->nama_desa;
+        $desa = Desa::find(Controller::getDesa()->id);
+        // $title = $desa->nama_desa;
 
-        return view('landing.home', compact('title'));
+        return view('landing.home', compact('desa'));
     }
 
     public function antrian()
