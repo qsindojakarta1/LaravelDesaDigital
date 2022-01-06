@@ -53,6 +53,7 @@ Route::get('apib/datas', [App\Http\Controllers\Apib\AuthController::class, 'data
 Route::domain(getDesaFromUrl()->sub_domain .'.' .env('APP_DOMAIN_URL'))->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/gallery',[HomeController::class,'gallery'])->name('gallery');
         Route::get('/profile',[HomeController::class,'profile'])->name('profile');
         Route::get('/sejarah',[HomeController::class,'sejarah'])->name('sejarah');
         Route::get('/kategori/{id}',[HomeController::class,'kategori'])->name('kategori');

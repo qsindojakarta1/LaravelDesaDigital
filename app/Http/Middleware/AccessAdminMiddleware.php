@@ -22,7 +22,7 @@ class AccessAdminMiddleware
     {
         if(getDesaFromUrl()->id != auth()->user()->desa->id){
             Auth::logout();
-            Alert::error('akses dilarang');
+            Alert::error('akses desa dilarang');
             return redirect('/login');
         }
         return $next($request);

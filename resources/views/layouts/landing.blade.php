@@ -110,7 +110,7 @@
                                     @endforeach
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="about.html"> Gallery </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}"> Gallery </a></li>
                             <li class="nav-item"><a class="nav-link" href="courses.html"> Unduh </a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Statistik
