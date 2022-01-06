@@ -2,9 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Controller;
 use Closure;
 use Error;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AccessAdminMiddleware
 {
@@ -17,8 +20,10 @@ class AccessAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->desa_id != $request->user()->desa_id){
-            abort(403);
+        if(getDesaFromUrl()->id != auth()->user()->desa->id){
+            Auth::logout();
+            Alert::error('akses dilarang');
+            return redirect('/login');
         }
         return $next($request);
     }

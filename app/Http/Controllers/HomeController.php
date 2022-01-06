@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Aduan;
 use App\Models\Antrian;
 use App\Models\Desa;
+use App\Models\Gallery;
+use App\Models\Informasi;
 use App\Models\JenisSurat;
+use App\Models\KategoriInformasi;
 use App\Models\Loket;
 use App\Models\Marque;
 use App\Models\Playlist;
 use App\Models\Rate;
 use App\Models\Rating;
+use App\Models\Slider;
 use App\Models\Warga;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,12 +24,36 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $url = url()->current();
-        $url = explode('/', $url);
-        $desa = Desa::find(Controller::getDesa()->id);
-        // $title = $desa->nama_desa;
-
-        return view('landing.home', compact('desa'));
+        $desa = getDesaFromUrl();
+        $sliders = Slider::where('desa_id', $desa->id)->get();
+        $informations = Informasi::where('desa_id', $desa->id)->latest()->paginate(6);
+        return view('landing.home', compact('desa', 'sliders', 'informations'));
+    }
+    public function profile()
+    {
+        $desa = getDesaFromUrl();
+        $sliders = Slider::where('desa_id', $desa->id)->get();
+        return view('landing.profile', compact('desa', 'sliders'));
+    }
+    public function sejarah()
+    {
+        $desa = getDesaFromUrl();
+        $sliders = Slider::where('desa_id', $desa->id)->get();
+        return view('landing.sejarah', compact('desa', 'sliders'));
+    }
+    public function kategori($id)
+    {
+        $desa = getDesaFromUrl();
+        $informasis = Informasi::where('kategori_informasi_id', $id)->latest()->paginate(12);
+        $sliders = Slider::where('desa_id', $desa->id)->get();
+        $kategori_informasi = KategoriInformasi::findOrFail($id);
+        return view('landing.kategori', compact('desa', 'informasis', 'sliders', 'kategori_informasi'));
+    }
+    public function gallery()
+    {
+        $desa = getDesaFromUrl();
+        $galleries = Gallery::where('desa_id', $desa->id)->get();
+        return view('landing.gallery', compact('desa', 'galleries'));
     }
 
     public function antrian()

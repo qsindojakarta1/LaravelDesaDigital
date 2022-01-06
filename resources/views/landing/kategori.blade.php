@@ -28,15 +28,15 @@
         <div class="row">
             <div class="col-xl-8 offset-xl-2">
                 <div class="site-title text-center mb-60">
-                    <span class="sub-title">Blog</span>
-                    <h2 class="mb-0">Latest News</h2>
+                    <span class="sub-title">Kategori {{ $kategori_informasi->nama }}</span>
+                    <h2 class="mb-0">Informasi Berdasarkan {{ $kategori_informasi->nama }}</h2>
                 </div>
             </div>
         </div>
         <div class="blog-wpr grid-3">
-            @foreach($informations as $data)
+            @foreach($informasis as $data)
             <div class="blog-box">
-                <div class="blog-pic d-flex justify-content-center">
+                <div class="blog-pic">
                     <img src="{{ asset('storage/'.$data->thumbnail) }}" alt="thumb">
                 </div>
                 <div class="blog-info">
@@ -55,14 +55,14 @@
                     </h4>
                     <div class="blog-date-more">
                         <small class="text-muted">{{ Carbon\Carbon::parse($data->created_at)->diffForHumans() }}</small>
-                        <a href="#" class="btn-3">Read More</a>
+                        <a href="#" class="btn-3"><small>Read More</small></a>
                     </div>
                 </div>
             </div>
             @endforeach
         </div>
         <div class="d-flex justify-content-center">
-            {{ $informations->links() }}
+            {{ $informasis->links() }}
         </div>
     </div>
 </div>

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Desa;
 use App\Models\Informasi;
 use App\Models\KategoriInformasi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class InformasiController extends Controller
@@ -50,8 +52,13 @@ class InformasiController extends Controller
             'desa_id' => 'required',
             'judul' => 'required',
             'deskripsi' => 'required',
+            'thumbnail' => 'required',
             'kategori_informasi_id' => 'required'
         ]);
+
+        $name = Carbon::now()->format('Ymd').'_'. $request->file('thumbnail')->getClientOriginalName();
+        $path = $request->file('thumbnail')->storeAs('desa/informasi',$name);
+        $attr['thumbnail'] = $path;
         Informasi::create($attr);
         Alert::success('success');
         return back();
@@ -98,6 +105,12 @@ class InformasiController extends Controller
             'deskripsi' => 'required',
             'kategori_informasi_id' => 'required'
         ]);
+        if($request->thumbnail){
+            $name = Carbon::now()->format('Ymd').'_'. $request->file('thumbnail')->getClientOriginalName();
+            $path = $request->file('thumbnail')->storeAs('desa/informasi',$name);
+            Storage::delete(Informasi::findOrFail($id)->thumbnail);
+            $attr['thumbnail'] = $path;
+        }
         Informasi::findOrFail($id)->update($attr);
         Alert::success('success');
         return back();

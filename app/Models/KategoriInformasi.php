@@ -9,4 +9,8 @@ class KategoriInformasi extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function informasis()
+    {
+        return $this->hasMany(Informasi::class);
+    }
 }

@@ -18,6 +18,7 @@ class CreateInformasisTable extends Migration
             $table->foreignId('desa_id')->constrained('desas');
             $table->string('judul');
             $table->text('deskripsi');
+            $table->string('thumbnail');
             $table->foreignId('kategori_informasi_id')->constrained('kategori_informasis');
             $table->timestamps();
         });

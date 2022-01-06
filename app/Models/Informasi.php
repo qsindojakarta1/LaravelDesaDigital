@@ -13,4 +13,8 @@ class Informasi extends Model
     {
         return $this->belongsTo(Desa::class);
     }
+    public function kategori_informasi()
+    {
+        return $this->belongsTo(KategoriInformasi::class);
+    }
 }

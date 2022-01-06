@@ -53,7 +53,7 @@
                 </div>
                 <div class="login-reg">
                     <ul class="header-top-list">
-                        <li><a href="login.html"><i class="ti-user"></i>Login</a></li>
+                        <li><a href="{{ route('login') }}"><i class="ti-user"></i>Login</a></li>
                         <li><a href="register.html"><i class="ti-user"></i>Register</a></li>
                     </ul>
                 </div>
@@ -69,7 +69,7 @@
             <nav id="navbar_top" class="navbar navbar-expand-lg">
                 <div class="container g-0">
                     <a class="navbar-brand" href="index.html">
-                        <img src="{{ \App\Http\Controllers\Controller::getDesa()->logo ?? asset('landing/assets/img/logo/logo.png') }}" class="logo-display" alt="thumb">
+                        <img src="{{ getDesaFromUrl()->logo ?? asset('landing/assets/img/logo/logo.png') }}" class="logo-display" alt="thumb">
                         <img src="{{ asset('landing/assets/img/logo/black-logo.png') }}" class="logo-scrolled" alt="thumb">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="main_nav">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="about.html"> Beranda </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}"> Beranda </a></li>
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
@@ -85,12 +85,12 @@
                                 </a>
                                 <ul class="dropdown-menu fade-up">
                                     <li>
-                                        <a class="dropdown-item" href="index.html">
+                                        <a class="dropdown-item" href="{{ route('profile') }}">
                                             Profile
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="index-2.html">
+                                        <a class="dropdown-item" href="{{ route('sejarah') }}">
                                             Sejarah
                                         </a>
                                     </li>
@@ -101,26 +101,13 @@
                                     Kategori
                                 </a>
                                 <ul class="dropdown-menu fade-up">
+                                    @foreach(App\Models\KategoriInformasi::get() as $data)
                                     <li>
-                                        <a class="dropdown-item" href="course-single.html">
-                                            Course Single
+                                        <a class="dropdown-item" href="{{ route('kategori',$data->id) }}">
+                                            {{ $data->nama }}
                                         </a>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" href="author-details.html">
-                                            Teacher Single
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="faq.html">
-                                            Faq
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="404.html">
-                                            404
-                                        </a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="about.html"> Gallery </a></li>

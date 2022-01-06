@@ -106,6 +106,10 @@
             <a class="side-menu__item" href="{{ route('desa.rating.index') }}"><i class="side-menu__icon" data-eva="star-outline"></i><span class="side-menu__label">Rating</span></a>
         </li>
         <li>
+            <a class="side-menu__item" href="{{ route('desa.slider.index') }}"><i class="side-menu__icon" data-eva="star-outline"></i><span class="side-menu__label">Slider</span></a>
+        </li>
+        
+        <li>
             <h3>Setting</h3>
         </li>
         <li>

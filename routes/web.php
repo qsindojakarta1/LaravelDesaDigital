@@ -17,6 +17,7 @@ use App\Http\Controllers\Desa\PlaylistController;
 use App\Http\Controllers\Desa\ProdukController;
 use App\Http\Controllers\Desa\RateController;
 use App\Http\Controllers\Desa\RatingController;
+use App\Http\Controllers\Desa\SliderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Warga\MasyarakatController;
 use App\Models\Desa;
@@ -49,54 +50,56 @@ Route::get('apib/login', [App\Http\Controllers\Apib\AuthController::class, 'logi
 Route::get('apib/aduan', [App\Http\Controllers\Apib\AuthController::class, 'aduan'])->name('apib.aduan');
 Route::get('apib/datas', [App\Http\Controllers\Apib\AuthController::class, 'datas'])->name('apib.datas');
 
-foreach (App\Models\Desa::get() as $data) {
-    Route::domain($data->sub_domain . '.localhost')->group(function () {
-        Route::middleware('guest')->group(function () {
-            Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-            Route::get('/antrian', [App\Http\Controllers\HomeController::class, 'antrian'])->name('antrian');
-            Route::post('/antrian', [App\Http\Controllers\HomeController::class, 'storeAntrian'])->name('antrian.store');
-            Route::get('/aduan', [App\Http\Controllers\HomeController::class, 'aduan'])->name('aduan');
-            Route::post('/aduan', [App\Http\Controllers\HomeController::class, 'storeAduan'])->name('aduan.store');
-            Route::get('/penilaian', [HomeController::class, 'penilaian'])->name('penilaian');
-            Route::get('/penilaian/{id}', [HomeController::class, 'storePenilaian'])->name('penilaian.store');
-        });
-
-        Route::middleware('auth')->middleware('accessadmin')->group(function () {
-            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-            Route::get('/setting', [DashboardController::class, 'setting'])->name('setting');
-            Route::post('/setting/{desa:id}', [DashboardController::class, 'updateSetting'])->name('setting.update');
-            Route::prefix('utama')->name('utama.')->group(function () {
-            });
-
-            Route::prefix('kabupaten')->name('kabupaten.')->group(function () {
-            });
-
-            Route::prefix('desa')->name('desa.')->group(function () {
-                Route::resource('kategori_informasi', KategoriInformasiController::class);
-                Route::resource('aduan', AduanController::class);
-                Route::resource('pengguna', PenggunaController::class);
-                Route::resource('gallery', GalleryController::class);
-                Route::resource('warga', WargaController::class);
-                Route::resource('informasi', InformasiController::class);
-                Route::resource('produk', ProdukController::class);
-                Route::resource('gallery', GalleryController::class);
-                Route::resource('warga', WargaController::class);
-                Route::resource('loket', LoketController::class);
-                Route::get('loket/{loket:id}', [LoketController::class, 'reset'])->name('loket.reset');
-                Route::resource('antrian', AntrianController::class);
-                Route::get('antrian/{antrian:id}/status', [AntrianController::class, 'status'])->name('antrian.status');
-                Route::resource('permohonan', PermohonanSuratController::class);
-                Route::resource('rates', RateController::class);
-                Route::resource('rating', RatingController::class);
-                Route::resource('playlist', PlaylistController::class);
-                Route::resource('marque', MarqueController::class);
-                Route::resource('cetak_surat', CetakSuratController::class);
-            });
-            Route::prefix('warga')->middleware('verified')->name('warga.')->group(function () {
-                Route::resource('masyarakat', MasyarakatController::class);
-            });
-        });
-
-        Route::get('video/{playlist:id}', [PlaylistController::class, 'getVideo']);
+Route::domain(getDesaFromUrl()->sub_domain .'.' .env('APP_DOMAIN_URL'))->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/profile',[HomeController::class,'profile'])->name('profile');
+        Route::get('/sejarah',[HomeController::class,'sejarah'])->name('sejarah');
+        Route::get('/kategori/{id}',[HomeController::class,'kategori'])->name('kategori');
+        Route::get('/antrian', [HomeController::class, 'antrian'])->name('antrian');
+        Route::post('/antrian', [HomeController::class, 'storeAntrian'])->name('antrian.store');
+        Route::get('/aduan', [HomeController::class, 'aduan'])->name('aduan');
+        Route::post('/aduan', [HomeController::class, 'storeAduan'])->name('aduan.store');
+        Route::get('/penilaian', [HomeController::class, 'penilaian'])->name('penilaian');
+        Route::get('/penilaian/{id}', [HomeController::class, 'storePenilaian'])->name('penilaian.store');
     });
-}
+
+    Route::middleware('auth')->middleware('accessadmin')->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/setting', [DashboardController::class, 'setting'])->name('setting');
+        Route::post('/setting/{desa:id}', [DashboardController::class, 'updateSetting'])->name('setting.update');
+        Route::prefix('utama')->name('utama.')->group(function () {
+        });
+
+        Route::prefix('kabupaten')->name('kabupaten.')->group(function () {
+        });
+
+        Route::prefix('desa')->name('desa.')->group(function () {
+            Route::resource('kategori_informasi', KategoriInformasiController::class);
+            Route::resource('aduan', AduanController::class);
+            Route::resource('pengguna', PenggunaController::class);
+            Route::resource('gallery', GalleryController::class);
+            Route::resource('warga', WargaController::class);
+            Route::resource('informasi', InformasiController::class);
+            Route::resource('produk', ProdukController::class);
+            Route::resource('gallery', GalleryController::class);
+            Route::resource('warga', WargaController::class);
+            Route::resource('loket', LoketController::class);
+            Route::get('loket/{loket:id}', [LoketController::class, 'reset'])->name('loket.reset');
+            Route::resource('antrian', AntrianController::class);
+            Route::get('antrian/{antrian:id}/status', [AntrianController::class, 'status'])->name('antrian.status');
+            Route::resource('permohonan', PermohonanSuratController::class);
+            Route::resource('rates', RateController::class);
+            Route::resource('rating', RatingController::class);
+            Route::resource('playlist', PlaylistController::class);
+            Route::resource('marque', MarqueController::class);
+            Route::resource('cetak_surat', CetakSuratController::class);
+            Route::resource('slider', SliderController::class);
+        });
+        Route::prefix('warga')->middleware('verified')->name('warga.')->group(function () {
+            Route::resource('masyarakat', MasyarakatController::class);
+        });
+    });
+
+    Route::get('video/{playlist:id}', [PlaylistController::class, 'getVideo']);
+}); 
