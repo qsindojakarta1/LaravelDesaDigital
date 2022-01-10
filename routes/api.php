@@ -66,3 +66,4 @@ Route::post('pendidikan',[DevController::class,'pendidikan']);
 Route::post('pekerjaan',[DevController::class,'pekerjaan']);
 Route::post('umur',[DevController::class,'umur']);
 Route::post('dusun',[DevController::class,'dusun']);
+Route::post('jenis_kelamin',[DevController::class,'jeniskelamin']);

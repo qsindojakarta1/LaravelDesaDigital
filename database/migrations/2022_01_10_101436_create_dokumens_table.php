@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBgToDesasTable extends Migration
+class CreateDokumensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddBgToDesasTable extends Migration
      */
     public function up()
     {
-        Schema::table('desas', function (Blueprint $table) {
-            $table->string('background')->nullable()->after('nama_desa');
+        Schema::create('dokumens', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ class AddBgToDesasTable extends Migration
      */
     public function down()
     {
-        Schema::table('desas', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('dokumens');
     }
 }

@@ -42,12 +42,12 @@
 
     <!-- Start Header Top
     ============================================= -->
-    <div class="header-top bg-3 py-4">
+    <div class="header-top bg-3 py-4" id="navbar">
         <div class="container">
             <div class="header-top-info">
                 <div class="email">
                     <ul class="header-top-list">
-                        <li><i class="ti-email"></i>Support@website.com</li>
+                        <li><i class="ti-email"></i>{{ $desa->header->email ?? env('APP_NAME') }}</li>
                         <li><a href="contact.html"><i class="ti-help"></i>Ask A Question</a></li>
                     </ul>
                 </div>
@@ -69,8 +69,8 @@
             <nav id="navbar_top" class="navbar navbar-expand-lg">
                 <div class="container g-0">
                     <a class="navbar-brand" href="index.html">
-                        <img src="{{ getDesaFromUrl()->logo ?? asset('landing/assets/img/logo/logo.png') }}" class="logo-display" alt="thumb">
-                        <img src="{{ asset('landing/assets/img/logo/black-logo.png') }}" class="logo-scrolled" alt="thumb">
+                        <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('landing/assets/img/logo/logo.png') }}" class="logo-display" width="100" alt="thumb">
+                        <img src="{{ getDesaFromUrl()->dark_logo ? asset('storage/'.getDesaFromUrl()->dark_logo) : asset('landing/assets/img/logo/black-logo.png') }}" class="logo-scrolled" width="100" alt="thumb">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"><i class="ti-menu-alt"></i></span>
@@ -101,13 +101,19 @@
                                     Kategori
                                 </a>
                                 <ul class="dropdown-menu fade-up">
-                                    @foreach(App\Models\KategoriInformasi::get() as $data)
+                                    @forelse(App\Models\KategoriInformasi::where('desa_id',getDesaFromUrl()->id)->get() as $data)
                                     <li>
                                         <a class="dropdown-item" href="{{ route('kategori',$data->id) }}">
                                             {{ $data->nama }}
                                         </a>
                                     </li>
-                                    @endforeach
+                                    @empty
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            tidak ada kategori di {{ getDesaFromUrl()->nama_desa }}
+                                        </a>
+                                    </li>
+                                    @endforelse
                                 </ul>
                             </li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}"> Gallery </a></li>
@@ -116,8 +122,10 @@
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Statistik
                                 </a>
                                 <ul class="dropdown-menu fade-up">
-                                    <li><a class="dropdown-item" href="blog.html"> Blog</a></li>
-                                    <li><a class="dropdown-item" href="single.html"> Blog Single</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('statistik.pekerjaan') }}"> pekerjaan</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('statistik.jenis_kelamin') }}"> jenis kelamin</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('statistik.kelompok_umur') }}">kelompok umur</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('statistik.agama') }}">agama</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -172,24 +180,24 @@
                     <div class="footer-widget-box about-us">
                         <h4 class="footer-widget-title">About Us</h4>
                         <div class="footer-icon mb-20">
-                            <img src="{{ asset('landing/assets/img/logo/logo.png') }}" alt="thumb">
+                            <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('landing/assets/img/logo/logo.png') }}" width="100" alt="thumb">
                         </div>
                         <p class="mb-20">
-                            Affronting discretion as do is announcing. Now months esteem oppose nearer enable too six. as do nearer is announcing.
+                            {{ getDesaFromUrl()->footer->tentang ?? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore aperiam quisquam, distinctio dolore quis sunt ex id rerum ipsam explicabo sapiente totam adipisci nesciunt iste libero quia repellendus voluptatem ipsum!' }}
                         </p>
                         <div class="footer-adrs">
                             <ul>
                                 <li>
                                     <i class="fas fa-street-view"></i>
-                                    <span>730 Hillpark,florida USA</span>
+                                    <span>{{ getDesaFromUrl()->footer->alamat ?? '730 Hillpark,florida USA' }}</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-phone-volume"></i>
-                                    <span>0900 123456</span>
+                                    <span>{{ getDesaFromUrl()->footer->telepon ?? '0900 123456' }}</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-envelope-open"></i>
-                                    <span>info@edumi.com</span>
+                                    <span>{{ getDesaFromUrl()->footer->email ?? 'info@edumi.com' }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -283,6 +291,7 @@
             </div>
         </div>
     </footer>
+    <input type="hidden" id="forwhat" value="{{ getDesaFromUrl()->header->color ?? 'pink' }}">
     <!-- End Footer-->
 
     <!-- Start Scroll top
@@ -307,6 +316,9 @@
     <script src="{{ asset('landing/assets/js/count-to.js') }}"></script>
     <script src="{{ asset('landing/assets/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('landing/assets/js/main.js') }}"></script>
+    <script>
+        $('#navbar').css('background-color', $('#forwhat').val())
+    </script>
     @include('sweetalert::alert')
     @stack('landing.script')
 </body>

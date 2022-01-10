@@ -6,6 +6,7 @@ use App\Http\Controllers\Desa\AduanController;
 use App\Http\Controllers\Desa\WargaController;
 use App\Http\Controllers\Desa\AntrianController;
 use App\Http\Controllers\Desa\CetakSuratController;
+use App\Http\Controllers\Desa\DokumenController;
 use App\Http\Controllers\Desa\GalleryController;
 use App\Http\Controllers\Desa\PermohonanSuratController;
 use App\Http\Controllers\Desa\InformasiController;
@@ -50,19 +51,25 @@ Route::get('apib/login', [App\Http\Controllers\Apib\AuthController::class, 'logi
 Route::get('apib/aduan', [App\Http\Controllers\Apib\AuthController::class, 'aduan'])->name('apib.aduan');
 Route::get('apib/datas', [App\Http\Controllers\Apib\AuthController::class, 'datas'])->name('apib.datas');
 
-Route::domain(getDesaFromUrl()->sub_domain .'.' .env('APP_DOMAIN_URL'))->group(function () {
+Route::domain(getDesaFromUrl()->sub_domain . '.' . env('APP_DOMAIN_URL'))->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::get('/gallery',[HomeController::class,'gallery'])->name('gallery');
-        Route::get('/profile',[HomeController::class,'profile'])->name('profile');
-        Route::get('/sejarah',[HomeController::class,'sejarah'])->name('sejarah');
-        Route::get('/kategori/{id}',[HomeController::class,'kategori'])->name('kategori');
+        Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
+        Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+        Route::get('/sejarah', [HomeController::class, 'sejarah'])->name('sejarah');
+        Route::get('/kategori/{id}', [HomeController::class, 'kategori'])->name('kategori');
         Route::get('/antrian', [HomeController::class, 'antrian'])->name('antrian');
         Route::post('/antrian', [HomeController::class, 'storeAntrian'])->name('antrian.store');
         Route::get('/aduan', [HomeController::class, 'aduan'])->name('aduan');
         Route::post('/aduan', [HomeController::class, 'storeAduan'])->name('aduan.store');
         Route::get('/penilaian', [HomeController::class, 'penilaian'])->name('penilaian');
         Route::get('/penilaian/{id}', [HomeController::class, 'storePenilaian'])->name('penilaian.store');
+        Route::name('statistik.')->group(function () {
+            Route::get('/pekerjaan', [HomeController::class, 'pekerjaan'])->name('pekerjaan');
+            Route::get('/jenis_kelamin', [HomeController::class, 'jenis_kelamin'])->name('jenis_kelamin');
+            Route::get('/kelompok_umur', [HomeController::class, 'kelompok_umur'])->name('kelompok_umur');
+            Route::get('/agama', [HomeController::class, 'agama'])->name('agama');
+        });
     });
 
     Route::middleware('auth')->middleware('accessadmin')->group(function () {
@@ -96,6 +103,7 @@ Route::domain(getDesaFromUrl()->sub_domain .'.' .env('APP_DOMAIN_URL'))->group(f
             Route::resource('marque', MarqueController::class);
             Route::resource('cetak_surat', CetakSuratController::class);
             Route::resource('slider', SliderController::class);
+            Route::resource('dokumen', DokumenController::class);
         });
         Route::prefix('warga')->middleware('verified')->name('warga.')->group(function () {
             Route::resource('masyarakat', MasyarakatController::class);
@@ -103,4 +111,7 @@ Route::domain(getDesaFromUrl()->sub_domain .'.' .env('APP_DOMAIN_URL'))->group(f
     });
 
     Route::get('video/{playlist:id}', [PlaylistController::class, 'getVideo']);
-}); 
+    Route::get('kill', function () {
+        Auth::logout();
+    });
+});

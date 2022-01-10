@@ -66,7 +66,7 @@ class DevController extends Controller
         foreach ($agamas as $agama) {
             array_push($array, [
                 'label' => $agama->nama,
-                'data' => [[1, round($agama->wargas->count() / Warga::get()->count() * 100)]],
+                'data' => [[1, round($agama->wargas()->where('desa_id',request()->desa_id)->count() / Warga::where('desa_id',request()->desa_id)->get()->count() * 100)]],
                 'color' => '#' . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT)
             ]);
         }
@@ -80,7 +80,7 @@ class DevController extends Controller
         foreach ($sukus as $suku) {
             array_push($array, [
                 'label' => $suku->nama,
-                'data' => [[1, round($suku->wargas->count() / Warga::get()->count() * 100)]],
+                'data' => [[1, round($suku->wargas()->where('desa_id',request()->desa_id)->count() / Warga::where('desa_id',request()->desa_id)->get()->count() * 100)]],
                 'color' => '#' . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT)
             ]);
         }
@@ -93,13 +93,24 @@ class DevController extends Controller
         foreach ($golongandarahs as $golongandarah) {
             array_push($array, [
                 'label' => $golongandarah->nama,
-                'data' => [[1, round($golongandarah->wargas->count() / Warga::get()->count() * 100)]],
+                'data' => [[1, round($golongandarah->wargas()->where('desa_id',request()->desa_id)->count() / Warga::where('desa_id',request()->desa_id)->get()->count() * 100)]],
                 'color' => '#' . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT)
             ]);
         }
         return response()->json($array);
     }
-
+    public function jeniskelamin()
+    {
+        $array = [];
+        foreach (Warga::getPossibleJenisKelamin() as $jeniskelamin) {
+            array_push($array, [
+                'label' => $jeniskelamin,
+                'data' => [[1, round(Warga::where('jenis_kelamin',$jeniskelamin)->count()) / Warga::count() * 100]],
+                'color' => '#' . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT)
+            ]);
+        }
+        return response()->json($array);
+    }
     public function statusperkawinan()
     {
         $statusperkawinans = StatusPerkawinan::get();
@@ -107,7 +118,7 @@ class DevController extends Controller
         foreach ($statusperkawinans as $statusperkawinan) {
             array_push($array, [
                 'label' => $statusperkawinan->nama,
-                'data' => [[1, round($statusperkawinan->wargas->count() / Warga::get()->count() * 100)]],
+                'data' => [[1, round($statusperkawinan->wargas()->where('desa_id',request()->desa_id)->count() / Warga::where('desa_id',request()->desa_id)->get()->count() * 100)]],
                 'color' => '#' . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT)
             ]);
         }
@@ -120,7 +131,7 @@ class DevController extends Controller
         foreach ($pendidikans as $pendidikan) {
             array_push($array, [
                 'label' => $pendidikan->nama,
-                'data' => [[1, round($pendidikan->wargas->count() / Warga::get()->count() * 100)]],
+                'data' => [[1, round($pendidikan->wargas()->where('desa_id',request()->desa_id)->count() / Warga::where('desa_id',request()->desa_id)->get()->count() * 100)]],
                 'color' => '#' . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT)
             ]);
         }
@@ -133,7 +144,7 @@ class DevController extends Controller
         foreach ($pekerjaans as $pekerjaan) {
             array_push($array, [
                 'label' => $pekerjaan->nama,
-                'data' => [[1, round($pekerjaan->wargas->count() / Warga::get()->count() * 100)]],
+                'data' => [[1, round($pekerjaan->wargas()->where('desa_id',request()->desa_id)->count() / Warga::where('desa_id',request()->desa_id)->get()->count() * 100)]],
                 'color' => '#' . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT) . str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT)
             ]);
         }
@@ -141,7 +152,7 @@ class DevController extends Controller
     }
     public function umur()
     {
-        $warga = Warga::get();
+        $warga = Warga::where('desa_id',request()->desa_id)->get();
         $arra = [];
         $range = range(1, 80);
         foreach ($warga as $data) {

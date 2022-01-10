@@ -33,7 +33,7 @@ class GalleryController extends Controller
     {
         return view('desa.gallery.create', [
             'gallery' => new Gallery(),
-            'desas' => Desa::get()
+            'desas' => Desa::where('id',auth()->user()->desa->id)->get()
         ]);
     }
 

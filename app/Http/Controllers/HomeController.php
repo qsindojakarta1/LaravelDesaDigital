@@ -56,6 +56,26 @@ class HomeController extends Controller
         return view('landing.gallery', compact('desa', 'galleries'));
     }
 
+    public function pekerjaan()
+    {
+        $desa = getDesaFromUrl();
+        return view('landing.pekerjaan', compact('desa'));
+    }
+    public function jenis_kelamin()
+    {
+        $desa = getDesaFromUrl();
+        return view('landing.jenis_kelamin', compact('desa'));
+    }
+    public function kelompok_umur()
+    {
+        $desa = getDesaFromUrl();
+        return view('landing.kelompok_umur', compact('desa'));
+    }
+    public function agama()
+    {
+        $desa = getDesaFromUrl();
+        return view('landing.agama', compact('desa'));
+    }
     public function antrian()
     {
         $url = url()->current();

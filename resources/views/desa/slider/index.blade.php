@@ -36,14 +36,14 @@
                                 <th>photo</th>
                                 <th>link</th>
                                 <th>teks</th>
-                                <!-- <th>Action</th> -->
+                                <td>action</td>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($sliders as $slider)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $slider->photo }}</td>
+                                <td class="text-center"><img src="{{ asset('storage/'.$slider->photo) }}" width="100" alt=""></td>
                                 <td>{{ $slider->link }}</td>
                                 <td>{{ $slider->teks }}</td>
                                 <td>

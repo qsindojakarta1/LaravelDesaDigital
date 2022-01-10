@@ -39,4 +39,12 @@ class Desa extends Model
     {
         return $this->hasMany(Antrian::class);
     }
+    public function header()
+    {
+        return $this->hasOne(Header::class);
+    }
+    public function footer()
+    {
+        return $this->hasOne(Footer::class);
+    }
 }

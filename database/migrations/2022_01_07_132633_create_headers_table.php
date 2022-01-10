@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKategoriInformasisTable extends Migration
+class CreateHeadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateKategoriInformasisTable extends Migration
      */
     public function up()
     {
-        Schema::create('kategori_informasis', function (Blueprint $table) {
+        Schema::create('headers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('desa_id')->constrained('desas');
-            $table->string('nama');
+            $table->string('email')->nullable();
+            $table->string('color')->nullable();
+            $table->foreignId('desa_id')->constrained('desas')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateKategoriInformasisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kategori_informasis');
+        Schema::dropIfExists('headers');
     }
 }

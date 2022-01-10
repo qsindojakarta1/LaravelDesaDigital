@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             });
         });
         $this->call(RolePermissionSeeder::class);
-        $this->call(UserSeeder::class);
+        // $this->call(UserSeeder::class);
         $this->call(JenisSuratSeeder::class);
         $this->call(AgamaSeeder::class);
         $this->call(GolonganDarahSeeder::class);
@@ -44,7 +44,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PendidikanSeeder::class);
         $this->call(StatusPerkawinanSeeder::class);
         $this->call(SukuSeeder::class);
-        \App\Models\Warga::factory(300)->create();
+        \App\Models\Warga::factory(350)->create();
         $this->call(LoketAntrianWargaSeeder::class);
+        $this->call(AdminDesaUser::class);
     }
 }

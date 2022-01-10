@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDesasTable extends Migration
+class CreateFootersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateDesasTable extends Migration
      */
     public function up()
     {
-        Schema::create('desas', function (Blueprint $table) {
+        Schema::create('footers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kecamatan_id')->constrained('kecamatans');
-            $table->string('nama_desa');
+            $table->text('tentang')->nullable();
             $table->text('alamat')->nullable();
-            $table->string('sub_domain')->nullable();
-            $table->string('dark_logo')->nullable();
-            $table->string('light_logo')->nullable();
+            $table->string('telepon')->nullable();
+            $table->string('email')->nullable();
+            $table->foreignId('desa_id')->constrained('desas')->unique();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateDesasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('desas');
+        Schema::dropIfExists('footers');
     }
 }

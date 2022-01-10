@@ -99,7 +99,6 @@
                 <div class="ht-200 ht-sm-300" id="flotPie6"></div>
             </div>
         </div>
-
     </div>
     <div class="col-md-12">
         <div class="card mb-3">
@@ -129,6 +128,7 @@
     </div><!-- col-6 -->
 </div>
 <input type="hidden" id="auth" value="{{ auth()->user()->id }}">
+<input type="hidden" id="desa_id" value="{{ getDesaFromUrl()->id }}">
 @push('script')
 <!-- Chart flot js -->
 <script src="{{ asset('assets/js/chart.flot.js') }}"></script>
@@ -145,7 +145,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
-                    auth: $('#auth').val()
+                    auth: $('#auth').val(),
+                    desa_id: $('#desa_id').val()
                 })
             }).then(data => data.json())
             $.plot('#flotPie1', piedata, {
@@ -188,7 +189,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
-                    auth: $('#auth').val()
+                    auth: $('#auth').val(),
+                    desa_id: $('#desa_id').val()
                 })
             }).then(data => data.json())
             $.plot('#flotPie2', piedata, {
@@ -231,7 +233,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
-                    auth: $('#auth').val()
+                    auth: $('#auth').val(),
+                    desa_id: $('#desa_id').val()
                 })
             }).then(data => data.json())
             $.plot('#flotPie3', piedata, {
@@ -274,7 +277,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
-                    auth: $('#auth').val()
+                    auth: $('#auth').val(),
+                    desa_id: $('#desa_id').val()
                 })
             }).then(data => data.json())
             $.plot('#flotPie4', piedata, {
@@ -317,7 +321,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
-                    auth: $('#auth').val()
+                    auth: $('#auth').val(),
+                    desa_id: $('#desa_id').val()
                 })
             }).then(data => data.json())
             $.plot('#flotPie5', piedata, {
@@ -360,7 +365,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 body: JSON.stringify({
-                    auth: $('#auth').val()
+                    auth: $('#auth').val(),
+                    desa_id: $('#desa_id').val()
                 })
             }).then(data => data.json())
             $.plot('#flotPie6', piedata, {
@@ -402,7 +408,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             body: JSON.stringify({
-                auth: $('#auth').val()
+                auth: $('#auth').val(),
+                desa_id: $('#desa_id').val()
             })
         }).then(data => data.json())
         var ctx1 = document.getElementById('chartBar1').getContext('2d');
@@ -453,7 +460,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             body: JSON.stringify({
-                auth: $('#auth').val()
+                auth: $('#auth').val(),
+                desa_id: $('#desa_id').val()
             })
         }).then(data => data.json())
         console.log(piedata)

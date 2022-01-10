@@ -35,8 +35,8 @@ class InformasiController extends Controller
     {
         return view('desa.informasi.create', [
             'informasi' => new Informasi(),
-            'desas' => Desa::get(),
-            'kategori_informasis' => KategoriInformasi::get()
+            'desas' => Desa::where('id',auth()->user()->desa->id)->get(),
+            'kategori_informasis' => KategoriInformasi::where('desa_id',auth()->user()->desa->id)->get()
         ]);
     }
 
@@ -85,8 +85,8 @@ class InformasiController extends Controller
     {
         return view('desa.informasi.edit', [
             'informasi' => Informasi::findOrFail($id),
-            'desas' => Desa::get(),
-            'kategori_informasis' => KategoriInformasi::get()
+            'desas' => Desa::where('id',auth()->user()->desa->id)->get(),
+            'kategori_informasis' => KategoriInformasi::where('desa_id',auth()->user()->desa->id)->get()
         ]);
     }
 

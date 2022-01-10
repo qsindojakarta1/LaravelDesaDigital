@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         @foreach($galleries as $data)
-        <a href="{{ asset('storage/'.$data->photo) }}" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
+        <a href="{{ asset('storage/'.$data->photo) }}" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-3 pb-4">
             <img src="{{ asset('storage/'.$data->photo) }}" class="img-fluid">
         </a>
         @endforeach
