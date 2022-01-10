@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Masyarakat List')
+@section('title', 'Dokumen List')
 @push('bread')
-<li class="breadcrumb-item active">Masyarakat</li>
+<li class="breadcrumb-item active">Dokumen</li>
 @endpush
 @section('content')
 <div class="row">
@@ -9,7 +9,7 @@
         <div class="card">
             <div class="card-header d-flex flex-row justify-content-between">
                 <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline-info"><i class="fas fa-long-arrow-alt-left"></i> <span>Back</span></a>
-                <a href="{{ route('desa.warga.create') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus"></i> <span>add</span></a>
+                <a href="{{ route('desa.dokumen.create') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus"></i> <span>add</span></a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -17,35 +17,20 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                <th>file</th>
                                 <th>desa</th>
-                                <th>kecamatan</th>
-                                <th>kabupaten</th>
-                                <th>nik</th>
-                                <th>nama_warga</th>
-                                <th>jenis_kelamin</th>
-                                <th>tempat lahir</th>
-                                <th>tanggal lahir</th>
-                                <th>di daftarkan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($wargas as $data)
+                            @foreach($dokumens as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td class="text-center"><a target="_blank" href="{{ asset('storage/'.$data->path) }}" class="btn btn-purple">file</a></td>
                                 <td>{{ $data->desa->nama_desa }}</td>
-                                <td>{{ $data->desa->kecamatan->nama_kecamatan }}</td>
-                                <td>{{ $data->desa->kecamatan->kabupaten->nama_kabupaten }}</td>
-                                <td>{{ $data->nik }}</td>
-                                <td>{{ $data->nama_warga }}</td>
-                                <td>{{ $data->jenis_kelamin }}</td>
-                                <td>{{ $data->tempat_lahir }}</td>
-                                <td>{{ $data->tanggal_lahir }}</td>
-                                <td>{{ $data->is_nik ?? 'Kosong' }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('desa.warga.edit', $data->id) }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
-                                        <form action="{{ route('desa.warga.destroy', $data->id) }}" method="post">
+                                        <form action="{{ route('desa.dokumen.destroy', $data->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-sm btn-outline-danger delete_confirm" type="submit"><i class="fas fa-trash"></i> Delete</button>

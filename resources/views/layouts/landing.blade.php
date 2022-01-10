@@ -116,8 +116,8 @@
                                     @endforelse
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}"> Gallery </a></li>
-                            <li class="nav-item"><a class="nav-link" href="courses.html"> Unduh </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('gallery') }}"> Galeri </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('dokumen') }}"> Unduh </a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Statistik
                                 </a>
@@ -178,7 +178,7 @@
             <div class="container">
                 <div class="footer-widget-wpr de-padding">
                     <div class="footer-widget-box about-us">
-                        <h4 class="footer-widget-title">About Us</h4>
+                        <h4 class="footer-widget-title">Tentang {{ getDesaFromUrl()->nama_desa }}</h4>
                         <div class="footer-icon mb-20">
                             <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('landing/assets/img/logo/logo.png') }}" width="100" alt="thumb">
                         </div>
@@ -203,84 +203,73 @@
                         </div>
                     </div>
                     <div class="footer-widget-box list">
-                        <h4 class="footer-widget-title">Quick Links</h4>
+                        <h4 class="footer-widget-title">Navigasi</h4>
                         <ul class="footer-list">
-                            <li><a href="#"><span>SEO</span> Small Business</a></li>
-                            <li><a href="#">Enterprise <span>SEO</span></a></li>
-                            <li><a href="#"><span>SEO</span> local Servies</a></li>
-                            <li><a href="#">National <span>SEO</span></a></li>
-                            <li><a href="#">International <span>SEO</span></a></li>
-                            <li><a href="#">Our Product</a></li>
-                            <li><a href="#">Doucumentation</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Company</a></li>
-                            <li><a href="#">What we do?</a></li>
+                            <li><a href="{{ route('antrian') }}">Pembuatan Surat</a></li>
+                            <li><a href="{{ route('home') }}">Beranda</a></li>
+                            <li><a href="#">Produk Warga</a></li>
+                            <li><a href="{{ route('gallery') }}">Galeri</a></li>
+                            <li><a href="{{ route('aduan') }}">Lapor</a></li>
+                            <li><a href="{{ route('dokumen') }}">Unduh</a></li>
                         </ul>
                     </div>
                     <div class="footer-widget-box popular-course">
-                        <h4 class="footer-widget-title">Popular Course</h4>
+                        <h4 class="footer-widget-title">Informasi</h4>
                         <ul class="footer-course">
+                            @forelse(App\Models\Informasi::where('desa_id',getDesaFromUrl()->id)->latest()->take(3)->get() as $data)
                             <li>
                                 <div class="footer-post d-flex align-items-center">
-                                    <img src="{{ asset('landing/assets/img/singlepost/70x70.png') }}" alt="thumb">
+                                    <img src="{{ asset('storage/'.$data->thumbnail) }}" width="100" alt="thumb">
                                     <div class="post-content">
                                         <a href="course-single.html">
                                             <h5>
-                                                Is at purse tried jokes china.
+                                                {{ $data->judul }}
                                             </h5>
                                         </a>
                                         <span class="footer-post-date">
-                                            Free
+                                            <small>
+                                                {{ Carbon\Carbon::parse($data->created_at)->diffForHumans() }}
+                                            </small>
                                         </span>
                                     </div>
                                 </div>
                             </li>
+                            @empty
                             <li>
                                 <div class="footer-post d-flex align-items-center">
-                                    <img src="assets/img/singlepost/70x70.png" alt="thumb">
                                     <div class="post-content">
-                                        <a href="course-single.html">
-                                            <h5>
-                                                Is at purse tried jokes china.
-                                            </h5>
-                                        </a>
-                                        <span class="footer-post-date">
-                                            $10
-                                        </span>
+                                        <h5>
+                                            Tidak Ada Informasi . . .
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="footer-post d-flex align-items-center">
-                                    <img src="assets/img/singlepost/70x70.png" alt="thumb">
-                                    <div class="post-content">
-                                        <a href="course-single.html">
-                                            <h5>
-                                                Is at purse tried jokes china.
-                                            </h5>
-                                        </a>
-                                        <span class="footer-post-date">
-                                            $15
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforelse
                         </ul>
                     </div>
                     <div class="footer-widget-box">
-                        <h4 class="footer-widget-title">Quick Contact</h4>
+                        <h4 class="footer-widget-title">Visitor</h4>
                         <div class="footer-contact">
-                            <form>
-                                <input class="inp input-1" type="text" placeholder="Your Name">
-                                <input class="inp input-2" type="email" placeholder="Enter Mail">
-                                <textarea class="inp input-3" placeholder="Message"></textarea>
-                                <button type="submit" class="btn-1">Contact</button>
-                            </form>
+                            <div class="card p-4">
+                                <div class="card-body">
+                                    <table>
+                                        <tr>
+                                            <th>
+                                                pengunjung hari ini
+                                            </th>
+                                            <th>
+                                                {{ $_SERVER['REMOTE_ADDR'] }}
+                                            </th>
+                                        </tr>
+                                    </table>    
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="copyright">
-                    <p class="mb-0">Copyright © 2021. All Rights Reserved <a href="#"> Templatebucket</a>.</p>
+                    <p class="mb-0">Copyright © 2021. All Rights Reserved <a href="#"> {{ env('APP_NAME') }}</a>.</p>
                     <ul class="footer-social">
                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-instagram"></i></a></li>
@@ -291,7 +280,7 @@
             </div>
         </div>
     </footer>
-    <input type="hidden" id="forwhat" value="{{ getDesaFromUrl()->header->color ?? 'pink' }}">
+    <input type="hidden" id="forwhat" value="{{ getDesaFromUrl()->header->color ?? '' }}">
     <!-- End Footer-->
 
     <!-- Start Scroll top

@@ -177,9 +177,9 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label class="form-label" for="desa_id" class="form-label">Desa</label>
-                <select name="desa_id" id="desa_id" value="{{ $warga->desa_id ?? old('desa_id') }}" class="form-control @error('desa_id') is-invalid @enderror">
+                <select name="desa_id" id="desa_id" class="form-control @error('desa_id') is-invalid @enderror">
                     @foreach($desas as $desa)
-                    <option @if($warga->desa_id == $desa->id) selected @endif value="{{ $desa->id }}">{{ $desa->nama_desa }}</option>
+                    <option @if($warga->desa_id ?? getDesaFromUrl()->id == $desa->id) selected @endif value="{{ $desa->id }}">{{ $desa->nama_desa }}</option>
                     @endforeach
                 </select>
                 @error('desa_id')
@@ -191,33 +191,37 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="form-label" for="kecamatan_id" class="form-label">Kecamatan</label>
-                <select name="kecamatan_id" id="kecamatan_id" value="{{ $warga->kecamatan_id ?? old('kecamatan_id') }}" class="form-control @error('kecamatan_id') is-invalid @enderror">
-                    @foreach($kecamatans as $kecamatan)
-                    <option @if($warga->kecamatan_id == $kecamatan->id) selected @endif value="{{ $kecamatan->id }}">{{ $kecamatan->nama_kecamatan }}</option>
-                    @endforeach
-                </select>
-                @error('kecamatan_id')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
+                <label class="form-label" for="kecamatan" class="form-label">kecamatan</label>
+                <input type="text" readonly class="form-control" id="kecamatan" value="{{ $warga->desa->kecamatan->nama_kecamatan  ?? getDesaFromUrl()->kecamatan->nama_kecamatan }}">
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="form-label" for="kabupaten_id" class="form-label">Kabupaten</label>
-                <select name="kabupaten_id" id="kabupaten_id" value="{{ $warga->kabupaten_id ?? old('kabupaten_id') }}" class="form-control @error('kabupaten_id') is-invalid @enderror">
-                    @foreach($kabupatens as $kabupaten)
-                    <option @if($warga->kabupaten_id == $kabupaten->id) selected @endif value="{{ $kabupaten->id }}">{{ $kabupaten->nama_kabupaten }}</option>
-                    @endforeach
-                </select>
-                @error('kabupaten_id')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-                @enderror
+                <label class="form-label" for="kabupaten" class="form-label">kabupaten</label>
+                <input type="text" readonly class="form-control" id="kabupaten" value="{{ $warga->desa->kecamatan->kabupaten->nama_kabupaten ?? getDesaFromUrl()->kecamatan->kabupaten->nama_kabupaten }}">
             </div>
         </div>
     </div>
 </div>
+@push('script')
+<script>
+    $('#desa_id').change(function() {
+        console.log($(this).val())
+        $('#kecamatan').val('')
+        $('#kabupaten').val('')
+        $.ajax({
+            url: `/api/desa/${$(this).val()}`,
+            method: 'get',
+            success: function(res) {
+                console.log(res)
+                $('#kecamatan').val(res.kecamatan.nama_kecamatan)
+                $('#kabupaten').val(res.kabupaten.nama_kabupaten)
+            },
+            error: function(err) {
+                console.log(err.statusText)
+
+            }
+        })
+    });
+</script>
+@endpush

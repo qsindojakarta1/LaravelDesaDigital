@@ -124,7 +124,7 @@
     </div>
 </div> -->
 
-<div class="row d-flex justify-content-between my-4">
+<div class="d-flex justify-content-between my-4">
     <div class="col-md-4">
         @foreach($loket as $lkt)
         <div class="row">

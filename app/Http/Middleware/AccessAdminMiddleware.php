@@ -20,11 +20,17 @@ class AccessAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(getDesaFromUrl()->id != auth()->user()->desa->id){
+        try {
+            if (getDesaFromUrl()->id != auth()->user()->desa->id) {
+                Auth::logout();
+                Alert::error('akses desa dilarang');
+                return redirect('/login');
+            }
+            return $next($request);
+        } catch (\Throwable $th) {
             Auth::logout();
-            Alert::error('akses desa dilarang');
+            Alert::error($th->getMessage());
             return redirect('/login');
         }
-        return $next($request);
     }
 }

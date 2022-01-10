@@ -57,6 +57,7 @@ Route::domain(getDesaFromUrl()->sub_domain . '.' . env('APP_DOMAIN_URL'))->group
         Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
         Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
         Route::get('/sejarah', [HomeController::class, 'sejarah'])->name('sejarah');
+        Route::get('/dokumen',[HomeController::class,'dokumen'])->name('dokumen');
         Route::get('/kategori/{id}', [HomeController::class, 'kategori'])->name('kategori');
         Route::get('/antrian', [HomeController::class, 'antrian'])->name('antrian');
         Route::post('/antrian', [HomeController::class, 'storeAntrian'])->name('antrian.store');

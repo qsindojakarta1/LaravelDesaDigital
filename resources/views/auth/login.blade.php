@@ -12,8 +12,8 @@
         <div class="col-lg-3 d-block mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <img src="../../../assets/img/brand/logo-1.png" class="mb-3" alt="Logo">
-                    <h4>Please sign in to continue</h4>
+                    <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : '../../../assets/img/brand/logo-1.png' }}" class="mb-3" alt="Logo">
+                    <h4>selamat datang di desa {{ getDesaFromUrl()->nama_desa }}</h4>
                     <form method="POST" action="{{ route('login') }}" class="text-left mt-3">
                         @csrf
                         <div class="form-group">

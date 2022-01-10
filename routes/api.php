@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\JenisSuratController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\SuratController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Desa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,3 +68,14 @@ Route::post('pekerjaan',[DevController::class,'pekerjaan']);
 Route::post('umur',[DevController::class,'umur']);
 Route::post('dusun',[DevController::class,'dusun']);
 Route::post('jenis_kelamin',[DevController::class,'jeniskelamin']);
+
+Route::get('/desa/{id}',function($id){
+    $desa = Desa::find($id);
+    $responses = [
+        'desa' => $desa,
+        'kecamatan' => $desa->kecamatan,
+        'kabupaten' => $desa->kecamatan->kabupaten,
+        'provinsi' => $desa->kecamatan->kabupaten->provinsi
+    ];
+    return response()->json($responses);
+});

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container pb-4 pt-4">
     <div class="d-flex justify-content-center">
-        <h1>Galleries</h1>
+        <h1>Galeri</h1>
     </div>
     <div class="row">
         @foreach($galleries as $data)

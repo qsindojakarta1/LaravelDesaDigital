@@ -110,6 +110,10 @@
         </li>
         
         <li>
+            <a class="side-menu__item" href="{{ route('desa.dokumen.index') }}"><i class="side-menu__icon" data-eva="file-outline"></i><span class="side-menu__label">Dokumen</span></a>
+        </li>
+        
+        <li>
             <h3>Setting</h3>
         </li>
         <li>

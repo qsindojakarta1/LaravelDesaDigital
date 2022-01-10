@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Aduan;
 use App\Models\Antrian;
 use App\Models\Desa;
+use App\Models\Dokumen;
 use App\Models\Gallery;
 use App\Models\Informasi;
 use App\Models\JenisSurat;
@@ -49,6 +50,12 @@ class HomeController extends Controller
         $kategori_informasi = KategoriInformasi::findOrFail($id);
         return view('landing.kategori', compact('desa', 'informasis', 'sliders', 'kategori_informasi'));
     }
+    public function dokumen()
+    {
+        $dokumens = Dokumen::where('desa_id', getDesaFromUrl()->id)->latest()->get();
+        $desa = getDesaFromUrl();
+        return view('landing.dokumen', compact('dokumens', 'desa'));
+    }
     public function gallery()
     {
         $desa = getDesaFromUrl();
@@ -78,9 +85,7 @@ class HomeController extends Controller
     }
     public function antrian()
     {
-        $url = url()->current();
-        $url = explode('/', $url);
-        $desa = Desa::where('sub_domain', $url[2])->firstOrFail();
+        $desa = Desa::findOrFail(getDesaFromUrl()->id);
         $title = $desa->nama_desa;
 
         // $selesai = Antrian::with('loket')->where('tanggal_antri', now('Asia/Jakarta')->format('Y-m-d'))->where('status', 2)->get();
@@ -102,11 +107,13 @@ class HomeController extends Controller
             'jenis' => 'required',
             'loket_id' => 'required'
         ]);
-
+        $warga = Warga::where('nik', $request->nik)->firstOrFail();
+        if($warga->desa_id != getDesaFromUrl()->id){
+            Alert::error('anda bukan dari desa '.getDesaFromUrl()->nama_desa);
+            return back();
+        }
         try {
-            $warga = Warga::where('nik', $request->nik)->firstOrFail();
-
-            $loket = Loket::where('desa_id', $warga->desa_id)->where('kuota', '>', 0)->find($request->loket_id);
+            $loket = Loket::where('desa_id', $warga->desa_id)->find($request->loket_id);
 
             $antrian =  Antrian::create([
                 'warga_id' => $warga->id,
@@ -129,9 +136,7 @@ class HomeController extends Controller
 
     public function aduan()
     {
-        $url = url()->current();
-        $url = explode('/', $url);
-        $desa = Desa::where('sub_domain', $url[2])->firstOrFail();
+        $desa = Desa::findOrFail(getDesaFromUrl()->id);
         $title = $desa->nama_desa;
 
         return view('landing.aduan', compact('title'));
@@ -139,10 +144,13 @@ class HomeController extends Controller
 
     public function storeAduan()
     {
-        request()->validate([
-            'nik' => 'required',
-            'aduan' => 'required'
-        ]);
+        $this->validate(
+            request(),
+            [
+                'nik' => 'required|exists:wargas,nik',
+                'aduan' => 'required'
+            ]
+        );
 
         try {
             $warga = Warga::where('nik', request('nik'))->firstOrFail();

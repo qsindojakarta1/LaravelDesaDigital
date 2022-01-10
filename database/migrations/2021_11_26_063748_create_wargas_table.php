@@ -16,8 +16,6 @@ class CreateWargasTable extends Migration
         Schema::create('wargas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('desa_id')->constrained('desas');
-            $table->foreignId('kecamatan_id')->constrained('kecamatans');
-            $table->foreignId('kabupaten_id')->constrained('kabupatens');
             $table->foreignId('user_id')->nullable();
             $table->string('kk')->nullable();
             $table->integer('nik')->unique();

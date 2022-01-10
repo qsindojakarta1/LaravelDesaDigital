@@ -27,8 +27,6 @@ class WargaFactory extends Factory
     {
         return [
             'desa_id' => random_int(1, Desa::count()),
-            'kecamatan_id' => random_int(1, Kecamatan::count()),
-            'kabupaten_id' => random_int(1, Kabupaten::count()),
             'kk' => rand(),
             'nik' => rand(),
             'nama_warga' => $this->faker->name(),
