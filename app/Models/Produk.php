@@ -17,4 +17,8 @@ class Produk extends Model
     {
         return $this->belongsTo(Desa::class);
     }
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class);
+    }
 }

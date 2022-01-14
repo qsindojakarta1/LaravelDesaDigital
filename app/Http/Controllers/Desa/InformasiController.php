@@ -20,7 +20,7 @@ class InformasiController extends Controller
      */
     public function index()
     {
-        $informasis = Informasi::orderBy('created_at', 'desc')->get();
+        $informasis = Informasi::orderBy('created_at', 'desc')->where('desa_id',getDesaFromUrl()->id)->get();
         return view('desa.informasi.index', [
             'informasis' => $informasis
         ]);

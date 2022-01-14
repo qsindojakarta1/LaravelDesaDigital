@@ -15,6 +15,9 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
+            $table->string('judul')->nullable();
+            $table->text('content')->nullable();
+            $table->foreignId('desa_id')->constrained('desas')->unique();
             $table->timestamps();
         });
     }

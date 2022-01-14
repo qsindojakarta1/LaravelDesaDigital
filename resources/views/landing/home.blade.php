@@ -49,13 +49,13 @@
                         <strong class="text-secondary">{{ $data->judul }}</strong>
                     </div>
                     <h4>
-                        <a href="single.html">
-                            {{ $data->deskripsi }}
+                        <a href="{{ route('informasi.show',$data->id) }}">
+                            {{ Str::limit($data->deskripsi,50,'...') }}
                         </a>
                     </h4>
                     <div class="blog-date-more">
                         <small class="text-muted">{{ Carbon\Carbon::parse($data->created_at)->diffForHumans() }}</small>
-                        <a href="#" class="btn-3">Read More</a>
+                        <a href="{{ route('informasi.show',$data->id) }}" class="btn-3">Read More</a>
                     </div>
                 </div>
             </div>

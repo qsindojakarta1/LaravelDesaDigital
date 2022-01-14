@@ -20,7 +20,10 @@
     </div>
     @endforeach
 </div>
-<div class="d-flex justify-content-center">
-    <h1>Sejarah</h1>
+<h1 class="text-center">{{ $sejarah->judul ?? 'judul sejarah' }}</h1>
+<div class="container">
+    <div class="py-4">
+        {!! $sejarah->content ?? 'content sejarah' !!}
+    </div>
 </div>
 @stop

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Desa;
 
 use App\Http\Controllers\Controller;
-use App\Models\KategoriInformasi;
+use App\Models\Sejarah;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class KategoriInformasiController extends Controller
+class SejarahController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class KategoriInformasiController extends Controller
      */
     public function index()
     {
-        return view('desa.kategori_informasi.index',[
-            'kategori_informasis' => KategoriInformasi::where('desa_id',getDesaFromUrl()->id)->get()
-        ]);
+        //
     }
 
     /**
@@ -28,9 +26,7 @@ class KategoriInformasiController extends Controller
      */
     public function create()
     {
-        return view('desa.kategori_informasi.create',[
-            'kategori_informasi' => new KategoriInformasi()
-        ]);
+        //
     }
 
     /**
@@ -41,13 +37,7 @@ class KategoriInformasiController extends Controller
      */
     public function store(Request $request)
     {
-        $attr = $this->validate($request,[
-            'nama' => 'required'
-        ]);
-        $attr['desa_id'] = auth()->user()->desa->id;
-        KategoriInformasi::create($attr);
-        Alert::success('success');
-        return back();
+        //
     }
 
     /**
@@ -69,8 +59,14 @@ class KategoriInformasiController extends Controller
      */
     public function edit($id)
     {
-        return view('desa.kategori_informasi.edit',[
-            'kategori_informasi' => KategoriInformasi::findOrFail($id)
+        if(!Sejarah::where('desa_id',$id)->exists()){
+            Sejarah::create([
+                'desa_id' => getDesaFromUrl()->id
+            ]);
+        }
+        $sejarah = Sejarah::where('desa_id',$id)->firstOrFail();
+        return view('desa.sejarah.edit',[
+            'sejarah' => $sejarah
         ]);
     }
 
@@ -84,9 +80,11 @@ class KategoriInformasiController extends Controller
     public function update(Request $request, $id)
     {
         $attr = $this->validate($request,[
-            'nama' => 'required'
+            'judul' => 'required',
+            'content' => 'required'
         ]);
-        KategoriInformasi::findOrFail($id)->update($attr);
+
+        Sejarah::findOrFail($id)->update($attr);
         Alert::success('success');
         return back();
     }
@@ -99,14 +97,6 @@ class KategoriInformasiController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            //code...
-            KategoriInformasi::findOrFail($id)->delete();
-            Alert::success('success');
-        } catch (\Throwable $th) {
-            //throw $th;
-            Alert::error($th->getMessage());
-            return back();
-        }
+        //
     }
 }

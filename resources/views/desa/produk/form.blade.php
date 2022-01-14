@@ -58,4 +58,19 @@
             @enderror
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label for="warga_id" class="form-label">warga</label>
+            <select class="form-control @error('warga_id') is-invalid @enderror" id="warga_id" name="warga_id" autocomplete="">
+                @foreach($wargas as $warga)
+                <option value="{{ $warga->id }}">{{ $warga->nama_warga }}</option>
+                @endforeach
+            </select>
+            @error('warga_id')
+            <span class="invalid-feedback">
+                {{ $message }}
+            </span>
+            @enderror
+        </div>
+    </div>
 </div>

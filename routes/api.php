@@ -26,6 +26,7 @@ use Illuminate\Validation\ValidationException;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::get('produk/desa/{id}',[DevController::class,'produk']);
 
 Route::post('/reset-password-token', [AuthController::class, 'forgot']);
 Route::post('password/reset', [AuthController::class,'reset']);

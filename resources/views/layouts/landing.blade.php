@@ -54,7 +54,7 @@
                 <div class="login-reg">
                     <ul class="header-top-list">
                         <li><a href="{{ route('login') }}"><i class="ti-user"></i>Login</a></li>
-                        <li><a href="register.html"><i class="ti-user"></i>Register</a></li>
+                        <li><a href="{{ route('register') }}"><i class="ti-user"></i>Register</a></li>
                     </ul>
                 </div>
             </div>
@@ -207,7 +207,7 @@
                         <ul class="footer-list">
                             <li><a href="{{ route('antrian') }}">Pembuatan Surat</a></li>
                             <li><a href="{{ route('home') }}">Beranda</a></li>
-                            <li><a href="#">Produk Warga</a></li>
+                            <li><a href="{{ route('produk') }}">Produk Warga</a></li>
                             <li><a href="{{ route('gallery') }}">Galeri</a></li>
                             <li><a href="{{ route('aduan') }}">Lapor</a></li>
                             <li><a href="{{ route('dokumen') }}">Unduh</a></li>
@@ -254,12 +254,16 @@
                                 <div class="card-body">
                                     <table>
                                         <tr>
-                                            <th>
-                                                pengunjung hari ini
-                                            </th>
-                                            <th>
-                                                {{ $_SERVER['REMOTE_ADDR'] }}
-                                            </th>
+                                            <th>pengunjung hari ini</th>
+                                            <th>{{ App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->whereDate('created_at',Carbon\Carbon::now()->format('Y-m-d'))->count() }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>pengunjung kemarin</th>
+                                            <th>{{ App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->whereDate('created_at',Carbon\Carbon::yesterday()->format('Y-m-d'))->count() }}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>total pengunjung</th>
+                                            <th>{{ App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->count() }}</th>
                                         </tr>
                                     </table>    
 

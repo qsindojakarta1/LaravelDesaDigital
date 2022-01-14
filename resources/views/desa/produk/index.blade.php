@@ -20,7 +20,8 @@
                                 <th>nama produk</th>
                                 <th>harga</th>
                                 <th>deskripsi</th>
-                                <th>desa id</th>
+                                <th>warga</th>
+                                <th>desa</th>
                                 <th>thumbnail</th>
                                 <th>Action</th>
                             </tr>
@@ -30,8 +31,9 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <th>{{ $data->nama_produk}}</th>
-                                <th>{{ $data->harga}}</th>
+                                <th>{{ number_format($data->harga)}}</th>
                                 <th>{{ $data->deskripsi}}</th>
+                                <th>{{ $data->warga->nama_warga }}</th>
                                 <th>{{ $data->desa->nama_desa }}</th>
                                 <td>
                                     <ul class="list-group list-group-horizontal-md">

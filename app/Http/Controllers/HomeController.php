@@ -13,9 +13,13 @@ use App\Models\KategoriInformasi;
 use App\Models\Loket;
 use App\Models\Marque;
 use App\Models\Playlist;
+use App\Models\Produk;
+use App\Models\Profile;
 use App\Models\Rate;
 use App\Models\Rating;
+use App\Models\Sejarah;
 use App\Models\Slider;
+use App\Models\Visitor;
 use App\Models\Warga;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,6 +27,15 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        Visitor::create([
+            'ip_address' => request()->ip(),
+            'mac_address' => substr(exec('getmac'), 0, 17),
+            'menu' => request()->route()->getName(),
+            'desa_id' => getDesaFromUrl()->id,
+        ]);
+    }
     public function index()
     {
         $desa = getDesaFromUrl();
@@ -34,13 +47,15 @@ class HomeController extends Controller
     {
         $desa = getDesaFromUrl();
         $sliders = Slider::where('desa_id', $desa->id)->get();
-        return view('landing.profile', compact('desa', 'sliders'));
+        $profile = Profile::where('desa_id',$desa->id)->first();
+        return view('landing.profile', compact('desa', 'sliders','profile'));
     }
     public function sejarah()
     {
         $desa = getDesaFromUrl();
         $sliders = Slider::where('desa_id', $desa->id)->get();
-        return view('landing.sejarah', compact('desa', 'sliders'));
+        $sejarah = Sejarah::where('desa_id',getDesaFromUrl()->id)->first();
+        return view('landing.sejarah', compact('desa', 'sliders','sejarah'));
     }
     public function kategori($id)
     {
@@ -62,7 +77,12 @@ class HomeController extends Controller
         $galleries = Gallery::where('desa_id', $desa->id)->get();
         return view('landing.gallery', compact('desa', 'galleries'));
     }
-
+    public function produk()
+    {
+        $desa = getDesaFromUrl();
+        $produks = Produk::where('desa_id',$desa->id)->latest()->paginate(12);
+        return view('landing.produk',compact('desa','produks'));
+    }
     public function pekerjaan()
     {
         $desa = getDesaFromUrl();
@@ -108,8 +128,8 @@ class HomeController extends Controller
             'loket_id' => 'required'
         ]);
         $warga = Warga::where('nik', $request->nik)->firstOrFail();
-        if($warga->desa_id != getDesaFromUrl()->id){
-            Alert::error('anda bukan dari desa '.getDesaFromUrl()->nama_desa);
+        if ($warga->desa_id != getDesaFromUrl()->id) {
+            Alert::error('anda bukan dari desa ' . getDesaFromUrl()->nama_desa);
             return back();
         }
         try {
@@ -186,5 +206,11 @@ class HomeController extends Controller
 
         Alert::success('Selamat!', 'Penilaian anda berhasil dikirimkan, terima kasih.');
         return back();
+    }
+    public function informasiShow($id)
+    {
+        $informasi = Informasi::findOrFail($id);
+        $desa = getDesaFromUrl();
+        return view('landing.informasi',compact('informasi','desa'));
     }
 }

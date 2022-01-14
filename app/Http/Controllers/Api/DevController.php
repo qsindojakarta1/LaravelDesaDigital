@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProdukResource;
 use App\Models\Agama;
 use App\Models\Desa;
 use App\Models\GolonganDarah;
 use App\Models\Pekerjaan;
 use App\Models\Pendidikan;
+use App\Models\Produk;
 use App\Models\StatusPerkawinan;
 use App\Models\Suku;
 use App\Models\Warga;
@@ -183,5 +185,11 @@ class DevController extends Controller
             'desa' => $arra,
             'jumlah' => $sad
         ]);
+    }
+    public function produk($id)
+    {
+        $produk = Produk::findOrFail($id);
+        $response = new ProdukResource($produk);
+        return response()->json($response);
     }
 }

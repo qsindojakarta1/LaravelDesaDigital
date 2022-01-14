@@ -4,7 +4,7 @@
     <div class="app-sidebar__user clearfix">
         <div class="user-pro-body">
             <div class="sideuser-img">
-                <img src="{{ asset('assets/img/photos/1.jpg') }}" alt="user-img" class="">
+                <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('assets/img/photos/1.jpg') }}" alt="user-img" class="">
                 <span class="sidebar-icon"></span>
             </div>
             <div class="user-info">
@@ -38,19 +38,10 @@
         @endrole
         @role('Desa')
         <li>
-            <h3>Daftar Masyarakat</h3>
-        </li>
-        <li>
-            <a class="side-menu__item" href="{{ route('desa.warga.index') }}"><i class="side-menu__icon" data-eva="layout-outline"></i><span class="side-menu__label">Daftar Masyarakat</span></a>
-        </li>
-        <li>
-            <h3>Pengguna</h3>
+            <h3>Permohonan Surat</h3>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.pengguna.index') }}"><i class="side-menu__icon" data-eva="stop-circle-outline"></i><span class="side-menu__label">Pengguna</span></a>
-        </li>
-        <li>
-            <h3>Surat</h3>
         </li>
         <li>
             <a class="side-menu__item" href="{{  route('desa.loket.index') }}"><i class="side-menu__icon" data-eva="home-outline"></i><span class="side-menu__label">Loket</span></a>
@@ -66,29 +57,25 @@
             <a class="side-menu__item" href="{{ route('desa.cetak_surat.index') }}"><i class="side-menu__icon" data-eva="email-outline"></i><span class="side-menu__label">Cetak Surat</span></a>
         </li>
         <li>
-            <h3>Gallery</h3>
-        </li>
-        <li>
-            <a class="side-menu__item" href="{{ route('desa.gallery.index') }}"><i class="side-menu__icon" data-eva="grid-outline"></i><span class="side-menu__label">Gallery</span></a>
-        </li>
-        <li>
             <a class="side-menu__item" href="{{ route('desa.playlist.index') }}"><i class="side-menu__icon" data-eva="video-outline"></i><span class="side-menu__label">Playlist</span></a>
         </li>
+        
+
         <li>
-            <h3>Produk Warga</h3>
+            <h3>Informasi</h3>
+        </li>
+
+        <li>
+            <a class="side-menu__item" href="{{ route('desa.warga.index') }}"><i class="side-menu__icon" data-eva="layout-outline"></i><span class="side-menu__label">Daftar Masyarakat</span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.produk.index') }}"><i class="side-menu__icon" data-eva="shopping-cart-outline"></i><span class="side-menu__label">Produk Warga</span></a>
         </li>
         <li>
-            <h3>Aduan</h3>
+            <a class="side-menu__item" href="{{ route('desa.gallery.index') }}"><i class="side-menu__icon" data-eva="grid-outline"></i><span class="side-menu__label">Gallery</span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.aduan.index') }}"><i class="side-menu__icon" data-eva="file-text-outline"></i><span class="side-menu__label">Aduan</span></a>
-        </li>
-
-        <li>
-            <h3>Informasi</h3>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.kategori_informasi.index') }}"><i class="side-menu__icon" data-eva="cube-outline"></i><span class="side-menu__label">Kategori Informasi</span></a>
@@ -108,11 +95,19 @@
         <li>
             <a class="side-menu__item" href="{{ route('desa.slider.index') }}"><i class="side-menu__icon" data-eva="star-outline"></i><span class="side-menu__label">Slider</span></a>
         </li>
-        
+
         <li>
             <a class="side-menu__item" href="{{ route('desa.dokumen.index') }}"><i class="side-menu__icon" data-eva="file-outline"></i><span class="side-menu__label">Dokumen</span></a>
         </li>
-        
+
+        <li>
+            <a class="side-menu__item" href="{{ route('desa.profile.edit',getDesaFromUrl()->id) }}"><i class="side-menu__icon" data-eva="folder-outline"></i><span class="side-menu__label">Profile</span></a>
+        </li>
+
+        <li>
+            <a class="side-menu__item" href="{{ route('desa.sejarah.edit',getDesaFromUrl()->id) }}"><i class="side-menu__icon" data-eva="file-outline"></i><span class="side-menu__label">Sejarah</span></a>
+        </li>
+
         <li>
             <h3>Setting</h3>
         </li>

@@ -22,7 +22,8 @@ class ProdukResource extends JsonResource
             'deskripsi' => $this->deskripsi,
             'created_at' => $this->created_at,
             'updated_at' => $this->created_at,
-            'photo' => PhotoResource::collection($this->photo)
-        ];
+            'photo' => PhotoResource::collection($this->photo),
+            'warga' => $this->warga
+         ];
     }
 }

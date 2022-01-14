@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Desa;
 use App\Models\Photo;
 use App\Models\Produk;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -19,8 +20,9 @@ class ProdukController extends Controller
      */
     public function index()
     {
+        $produks = Produk::where('desa_id',auth()->user()->desa_id)->latest()->get();
         return view('desa.produk.index', [
-            'produks' => Produk::get()
+            'produks' => $produks
         ]);
     }
 
@@ -33,7 +35,8 @@ class ProdukController extends Controller
     {
         return view('desa.produk.create', [
             'produk' => new Produk(),
-            'desas' => Desa::get()
+            'desas' => Desa::where('id',getDesaFromUrl()->id)->get(),
+            'wargas' => Warga::where('desa_id',getDesaFromUrl()->id)->get()
         ]);
     }
 
@@ -49,7 +52,8 @@ class ProdukController extends Controller
             'nama_produk' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required',
-            'desa_id' => 'required'
+            'desa_id' => 'required',
+            'warga_id' => 'required'
         ]);
         unset($attr['photo']);
         $attr['user_id'] = auth()->user()->id;
@@ -87,7 +91,8 @@ class ProdukController extends Controller
     {
         return view('desa.produk.edit', [
             'produk' => Produk::findOrFail($id),
-            'desas' => Desa::get()
+            'desas' => Desa::where('id',getDesaFromUrl()->id)->get(),
+            'wargas' => Warga::where('desa_id',getDesaFromUrl()->id)->get()
         ]);
     }
 
@@ -104,7 +109,8 @@ class ProdukController extends Controller
             'nama_produk' => 'required',
             'harga' => 'required',
             'deskripsi' => 'required',
-            'desa_id' => 'required'
+            'desa_id' => 'required',
+            'warga_id' => 'required'
         ]);
         $attr['user_id'] = auth()->user()->id;
         $produk = Produk::findOrFail($id)->update($attr);
