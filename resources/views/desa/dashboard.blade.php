@@ -107,8 +107,8 @@
                     Grafik Umur
                 </div>
                 <p class="mg-b-20">Grafik Pertumbuhan Penduduk Berdasarkan Umur</p>
-                <div class="">
-                    <canvas id="chartBar1"></canvas>
+                <div class="chart-container" style="height: 500px !important;">
+                    <canvas width="600" height="250" id="chartBar1"></canvas>
                 </div>
             </div>
         </div>
@@ -120,8 +120,8 @@
                     Grafik Dusun
                 </div>
                 <p class="mg-b-20">Grafik Pertumbuhan Penduduk Berdasarkan Dusun</p>
-                <div class="">
-                    <canvas id="chartBar2"></canvas>
+                <div class="chart-container" style="height: 500px !important;">
+                    <canvas width="600" height="250" id="chartBar2"></canvas>
                 </div>
             </div>
         </div>
@@ -490,14 +490,14 @@
                         ticks: {
                             beginAtZero: true,
                             fontSize: 10,
-                            max: 200
+                            max: 100
                         }
                     }],
                     xAxes: [{
                         barPercentage: 0.6,
                         ticks: {
                             beginAtZero: true,
-                            fontSize: 11
+                            fontSize: 8
                         }
                     }]
                 }

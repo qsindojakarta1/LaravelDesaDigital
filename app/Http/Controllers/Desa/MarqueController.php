@@ -56,6 +56,8 @@ class MarqueController extends Controller
 
     public function destroy(Marque $marque)
     {
-        //
+        $marque->delete();
+        Alert::success('success','success delete marque');
+        return back();
     }
 }

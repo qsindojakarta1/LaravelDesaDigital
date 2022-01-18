@@ -34,7 +34,7 @@ class WargaController extends Controller
     {
         return view('desa.warga.create', [
             'warga' => new Warga(),
-            'desas' => Desa::get()
+            'desas' => Desa::where('id', getDesaFromUrl()->id)->get()
         ]);
     }
 
@@ -93,7 +93,7 @@ class WargaController extends Controller
     {
         return view('desa.warga.edit', [
             'warga' => Warga::findOrFail($id),
-            'desas' => Desa::get()
+            'desas' => Desa::where('id', getDesaFromUrl()->id)->get()
         ]);
     }
 

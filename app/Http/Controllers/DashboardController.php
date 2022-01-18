@@ -20,12 +20,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $warga = Warga::get()->count();
-        $aduan = Aduan::get()->count();
-        $pengguna = User::whereHas('roles', function ($qr) {
+        $warga = Warga::where('desa_id', getDesaFromUrl()->id)->count();
+        $aduan = Aduan::where('desa_id', getDesaFromUrl()->id)->count();
+        $produk = Produk::where('desa_id', getDesaFromUrl()->id)->count();
+        $pengguna = User::where('desa_id', getDesaFromUrl()->id)->whereHas('roles', function ($qr) {
             return $qr->where('name', 'Warga');
-        })->get()->count();
-        $produk = Produk::get()->count();
+        })->count();
+
         return view('dashboard.index', [
             'warga' => $warga,
             'aduan' => $aduan,
@@ -62,6 +63,10 @@ class DashboardController extends Controller
 
     public function updateSetting(Desa $desa)
     {
+        if ($desa->id != getDesaFromUrl()->id) {
+            toast('akses dilarang', 'warning');
+            return back();
+        }
         $this->validate(request(), [
             'alamat' => 'required',
             'email' => 'required',

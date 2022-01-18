@@ -41,20 +41,20 @@
             <h3>Permohonan Surat</h3>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.pengguna.index') }}"><i class="side-menu__icon" data-eva="stop-circle-outline"></i><span class="side-menu__label">Pengguna</span></a>
+            <a class="side-menu__item" href="{{ route('desa.pengguna.index') }}"><i class="side-menu__icon" data-eva="person-done-outline"></i><span class="side-menu__label">Pengguna</span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{  route('desa.loket.index') }}"><i class="side-menu__icon" data-eva="home-outline"></i><span class="side-menu__label">Loket</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{  route('desa.antrian.index') }}"><i class="side-menu__icon" data-eva="list-outline"></i><span class="side-menu__label">Antrian</span></a>
+            <a class="side-menu__item" href="{{  route('desa.antrian.index') }}"><i class="side-menu__icon" data-eva="speaker-outline"></i><span class="side-menu__label">Antrian</span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.permohonan.index') }}"><i class="side-menu__icon" data-eva="email-outline"></i><span class="side-menu__label">Permohonan Surat</span></a>
         </li>
 
         <li>
-            <a class="side-menu__item" href="{{ route('desa.cetak_surat.index') }}"><i class="side-menu__icon" data-eva="email-outline"></i><span class="side-menu__label">Cetak Surat</span></a>
+            <a class="side-menu__item" href="{{ route('desa.cetak_surat.index') }}"><i class="side-menu__icon" data-eva="printer-outline"></i><span class="side-menu__label">Cetak Surat</span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.playlist.index') }}"><i class="side-menu__icon" data-eva="video-outline"></i><span class="side-menu__label">Playlist</span></a>
@@ -78,34 +78,34 @@
             <a class="side-menu__item" href="{{ route('desa.aduan.index') }}"><i class="side-menu__icon" data-eva="file-text-outline"></i><span class="side-menu__label">Aduan</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.kategori_informasi.index') }}"><i class="side-menu__icon" data-eva="cube-outline"></i><span class="side-menu__label">Kategori Informasi</span></a>
+            <a class="side-menu__item" href="{{ route('desa.kategori_informasi.index') }}"><i class="side-menu__icon" data-eva="bookmark-outline"></i><span class="side-menu__label">Kategori Informasi</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.informasi.index') }}"><i class="side-menu__icon" data-eva="cube-outline"></i><span class="side-menu__label">Informasi</span></a>
+            <a class="side-menu__item" href="{{ route('desa.informasi.index') }}"><i class="side-menu__icon" data-eva="book-outline"></i><span class="side-menu__label">Informasi</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.marque.index') }}"><i class="side-menu__icon" data-eva="cube-outline"></i><span class="side-menu__label">Marque</span></a>
+            <a class="side-menu__item" href="{{ route('desa.marque.index') }}"><i class="side-menu__icon" data-eva="text-outline"></i><span class="side-menu__label">Marque</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.rates.index') }}"><i class="side-menu__icon" data-eva="star-outline"></i><span class="side-menu__label">Rates</span></a>
+            <a class="side-menu__item" href="{{ route('desa.rates.index') }}"><i class="side-menu__icon" data-eva="layers-outline"></i><span class="side-menu__label">Rates</span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.rating.index') }}"><i class="side-menu__icon" data-eva="star-outline"></i><span class="side-menu__label">Rating</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.slider.index') }}"><i class="side-menu__icon" data-eva="star-outline"></i><span class="side-menu__label">Slider</span></a>
+            <a class="side-menu__item" href="{{ route('desa.slider.index') }}"><i class="side-menu__icon" data-eva="image-outline"></i><span class="side-menu__label">Slider</span></a>
         </li>
 
         <li>
-            <a class="side-menu__item" href="{{ route('desa.dokumen.index') }}"><i class="side-menu__icon" data-eva="file-outline"></i><span class="side-menu__label">Dokumen</span></a>
+            <a class="side-menu__item" href="{{ route('desa.dokumen.index') }}"><i class="side-menu__icon" data-eva="file-text-outline"></i><span class="side-menu__label">Dokumen</span></a>
         </li>
 
         <li>
-            <a class="side-menu__item" href="{{ route('desa.profile.edit',getDesaFromUrl()->id) }}"><i class="side-menu__icon" data-eva="folder-outline"></i><span class="side-menu__label">Profile</span></a>
+            <a class="side-menu__item" href="{{ route('desa.profile.edit',getDesaFromUrl()->id) }}"><i class="side-menu__icon" data-eva="question-mark-circle-outline"></i><span class="side-menu__label">Profile</span></a>
         </li>
 
         <li>
-            <a class="side-menu__item" href="{{ route('desa.sejarah.edit',getDesaFromUrl()->id) }}"><i class="side-menu__icon" data-eva="file-outline"></i><span class="side-menu__label">Sejarah</span></a>
+            <a class="side-menu__item" href="{{ route('desa.sejarah.edit',getDesaFromUrl()->id) }}"><i class="side-menu__icon" data-eva="info-outline"></i><span class="side-menu__label">Sejarah</span></a>
         </li>
 
         <li>

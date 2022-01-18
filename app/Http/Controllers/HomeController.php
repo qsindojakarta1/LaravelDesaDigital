@@ -63,6 +63,10 @@ class HomeController extends Controller
         $informasis = Informasi::where('kategori_informasi_id', $id)->latest()->paginate(12);
         $sliders = Slider::where('desa_id', $desa->id)->get();
         $kategori_informasi = KategoriInformasi::findOrFail($id);
+        if($kategori_informasi->desa_id != $desa->id){
+            toast('akses kategori informasi dilarang','warning');
+            return redirect()->route('home');
+        }
         return view('landing.kategori', compact('desa', 'informasis', 'sliders', 'kategori_informasi'));
     }
     public function dokumen()
@@ -140,8 +144,8 @@ class HomeController extends Controller
                 'jenis_surat_id' => $request->jenis,
                 'no_antrian' => $request->no_antri,
                 'desa_id' => $warga->desa_id,
-                'loket_id' => $loket->id
-
+                'loket_id' => $loket->id,
+                'tanggal_antri' => Carbon::now()->format('Y-m-d')
             ]);
             $sisa = $loket->kuota - 1;
             $loket->update(['kuota' => $sisa]);
@@ -211,6 +215,17 @@ class HomeController extends Controller
     {
         $informasi = Informasi::findOrFail($id);
         $desa = getDesaFromUrl();
+        if($informasi->desa_id != $desa->id){
+            toast('akses informasi dilarang','warning');
+            return redirect()->route('home');
+        }
         return view('landing.informasi',compact('informasi','desa'));
+    }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $desa = getDesaFromUrl();
+        $informasis = Informasi::orWhere('judul','like','%'.$request->search.'%')->orWhere('deskripsi','like','%'.$request->search.'%')->latest()->get();
+        return view('landing.search',compact('informasis','desa','search'));
     }
 }

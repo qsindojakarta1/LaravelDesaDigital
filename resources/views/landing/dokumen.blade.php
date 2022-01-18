@@ -11,6 +11,8 @@
                     <table class="table table-borderless border table-hover text-center">
                         <thead class="bg-dark text-light">
                             <tr>
+                                <td>no</td>
+                                <td>Nama</td>
                                 <td>Upload</td>
                                 <th>Dokumen</th>
                                 <th>Download</th>
@@ -19,6 +21,8 @@
                         <tbody>
                             @foreach($dokumens as $dokumen)
                             <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ basename($dokumen->path) }}</td>
                                 <td>{{ Carbon\Carbon::parse($dokumen->created_at)->diffForHumans() }}</td>
                                 <td>{{ number_format(Storage::size($dokumen->path) / 1048576,2) }} MB / ({{ File::extension($dokumen->path) }})</td>
                                 <td class="text-center"><a href="{{ asset('storage/'.$dokumen->path) }}" class="btn btn-lg btn-primary">download</a></td>

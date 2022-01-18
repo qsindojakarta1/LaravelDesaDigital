@@ -58,6 +58,10 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
+        if (Profile::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
+            toast('akses dilarang', 'warning');
+            return back();
+        }
         if (!Profile::where('desa_id', $id)->exists()) {
             Profile::create([
                 'desa_id' => getDesaFromUrl()->id
@@ -78,6 +82,11 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        if (Profile::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
+            toast('akses dilarang', 'warning');
+            return back();
+        }
         $attr = $this->validate($request, [
             'judul' => 'required',
             'content' => 'required'

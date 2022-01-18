@@ -59,13 +59,17 @@ class SejarahController extends Controller
      */
     public function edit($id)
     {
-        if(!Sejarah::where('desa_id',$id)->exists()){
+        if (Sejarah::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
+            toast('akses dilarang', 'warning');
+            return back();
+        }
+        if (!Sejarah::where('desa_id', $id)->exists()) {
             Sejarah::create([
                 'desa_id' => getDesaFromUrl()->id
             ]);
         }
-        $sejarah = Sejarah::where('desa_id',$id)->firstOrFail();
-        return view('desa.sejarah.edit',[
+        $sejarah = Sejarah::where('desa_id', $id)->firstOrFail();
+        return view('desa.sejarah.edit', [
             'sejarah' => $sejarah
         ]);
     }
@@ -79,7 +83,11 @@ class SejarahController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $attr = $this->validate($request,[
+        if (Sejarah::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
+            toast('akses dilarang', 'warning');
+            return back();
+        }
+        $attr = $this->validate($request, [
             'judul' => 'required',
             'content' => 'required'
         ]);

@@ -16,7 +16,7 @@ class CreateMarquesTable extends Migration
         Schema::create('marques', function (Blueprint $table) {
             $table->id();
             $table->foreignId('desa_id');
-            $table->string('marque');
+            $table->text('marque');
             $table->integer('is_active')->default(1);
             $table->timestamps();
         });

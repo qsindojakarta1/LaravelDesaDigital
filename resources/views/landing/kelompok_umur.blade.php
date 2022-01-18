@@ -24,7 +24,7 @@
 <style>
     #chartBar1 {
         width: 100%;
-        height: 10px;
+        height: 300px;
     }
 </style>
 @endpush

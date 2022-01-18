@@ -18,8 +18,11 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-        return view('desa.pengguna.index',[
-            'penggunas' => User::whereHas('roles', function($qr){ return $qr->where('name','Warga'); })->get()
+        $penggunas = User::where('desa_id',getDesaFromUrl()->id)->whereHas('roles', function ($qr) {
+            return $qr->where('name', 'Warga');
+        })->get();
+        return view('desa.pengguna.index', [
+            'penggunas' => $penggunas
         ]);
     }
 

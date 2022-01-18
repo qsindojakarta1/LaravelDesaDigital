@@ -48,7 +48,7 @@
                 <div class="email">
                     <ul class="header-top-list">
                         <li><i class="ti-email"></i>{{ $desa->header->email ?? env('APP_NAME') }}</li>
-                        <li><a href="contact.html"><i class="ti-help"></i>Ask A Question</a></li>
+                        <li><a href="#"><i class="ti-map"></i>{{ getDesaFromUrl()->alamat }}</a></li>
                     </ul>
                 </div>
                 <div class="login-reg">

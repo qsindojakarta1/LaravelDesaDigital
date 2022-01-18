@@ -123,52 +123,56 @@
         </div>
     </div>
 </div> -->
+<div class="container">
 
-<div class="d-flex justify-content-between my-4">
-    <div class="col-md-4">
-        @foreach($loket as $lkt)
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <div class="card shadow">
-                    <div class="card-body text-center">
-                        <div class="">
-                            @if($lkt->antrian()->where('tanggal_antri', now()->format('Y-m-d'))->count() > $lkt->kuota)
-                            <p>*Nomor antrian telah habis</p>
-                            @else
-                            <div>
-                                <h3 class="">
-                                    <span class="text-primary">{{ $lkt->nama }}</span>
-                                    {{ number_format($lkt->antrian()->where('tanggal_antri', now()->format('Y-m-d'))->count() + 1, 0, ",",".") }}
-                                </h3>
+    <div class="d-flex justify-content-between my-4">
+        <div class="col-md-4">
+            @foreach($loket as $lkt)
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <div class="card shadow">
+                        <div class="card-body text-center">
+                            <div class="">
+                                @if($lkt->antrian()->where('tanggal_antri', now()->format('Y-m-d'))->count() > $lkt->kuota)
+                                <p>*Nomor antrian telah habis</p>
+                                @else
+                                <div>
+                                    <h3 class="">
+                                        <span class="text-primary">{{ $lkt->nama }}</span>
+                                        {{ number_format($lkt->antrian()->where('tanggal_antri', now()->format('Y-m-d'))->count() + 1, 0, ",",".") }}
+                                    </h3>
+                                </div>
+                                <b>Nomor Antrian</b>
+                                <br><br>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-antri{{ $lkt->id }}">
+                                    Daftar
+                                </button>
+                                @endif
                             </div>
-                            <b>Nomor Antrian</b>
-                            <br><br>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-antri{{ $lkt->id }}">
-                                Daftar
-                            </button>
-                            @endif
                         </div>
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
+
+        <div class="col-md-8">
+
+        </div>
     </div>
 
-    <div class="col-md-8">
-
-    </div>
-</div>
-
-<div class=" row mb-5">
-    <div class="col-md-12">
-        <div class="bg-white p-3 rounded">
-            <div class="marquee">
-                <ul class="marquee-content">
-                    @foreach($marques as $marque)
-                    <li><b> {{ $marque->marque }} &bull; </b></li>
-                    @endforeach
-                </ul>
+    <div class=" row mb-5">
+        <div class="col-md-12">
+            <div class="bg-white p-3 rounded">
+                <div class="marquee">
+                    <ul class="marquee-content">
+                        <marquee behavior="" direction="">
+                            @foreach($marques as $marque)
+                            <li><b>{{ $marque->marque }} &bull; </b></li>
+                            @endforeach
+                        </marquee>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

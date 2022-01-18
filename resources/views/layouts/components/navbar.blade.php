@@ -48,14 +48,14 @@
                 </a>
                 <div class="dropdown-menu">
                     <div class="main-header-profile">
-                        <h6>Admin</h6>
+                        <h6>Admin {{ getDesaFromUrl()->nama_desa }}</h6>
                         <span>Administrator</span>
                     </div>
-                    <a class="dropdown-item" href="#"><i class="si si-user"></i> Profile</a>
-                    <a class="dropdown-item" href="#"><i class="si si-envelope-open"></i> Inbox</a>
-                    <a class="dropdown-item" href="#"><i class="si si-calendar"></i> Activity</a>
-                    <a class="dropdown-item" href="#"><i class="si si-bubbles"></i> Chat</a>
-                    <a class="dropdown-item" href="#"><i class="si si-settings"></i> Settings</a>
+                    <a class="dropdown-item" href="{{ route('desa.profile.edit',getDesaFromUrl()->id) }}"><i class="si si-user"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ route('desa.cetak_surat.index') }}"><i class="si si-envelope-open"></i> Inbox</a>
+                    <a class="dropdown-item" href="{{ route('desa.antrian.index') }}"><i class="si si-calendar"></i> Activity</a>
+                    <a class="dropdown-item" href="{{ route('desa.aduan.index') }}"><i class="si si-bubbles"></i> Chat</a>
+                    <a class="dropdown-item" href="{{ route('setting') }}"><i class="si si-settings"></i> Settings</a>
                     <a class="dropdown-item" href="#" onclick="logoutform()"><i class="si si-power"></i> Log Out</a>
                     <form action="{{ route('logout') }}" method="post" id="logout-form">
                         @csrf
@@ -91,8 +91,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
@@ -103,11 +102,6 @@
                     </li>
                     @endguest
                 </ul>
-            </div>
-            <div class="main-header-sidebar-notification">
-                <a href="#" class="header-link" data-toggle="sidebar-right" data-target=".sidebar-right">
-                    <i class="header-icons" data-eva="options-2-outline"></i>
-                </a>
             </div>
         </div>
     </div>
