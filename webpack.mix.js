@@ -10,7 +10,11 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-mix.browserSync('127.0.0.1:8000');
+mix.browserSync({
+    proxy: 'http://127.0.0.1:8000',
+    host: 'localhost',
+    port: 3000
+});
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();

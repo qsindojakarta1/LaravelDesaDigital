@@ -66,6 +66,12 @@
         </li>
 
         <li>
+            <a class="side-menu__item" href="{{ route('desa.tag.index') }}"><i class="side-menu__icon" data-eva="layout-outline"></i><span class="side-menu__label">Tag</span></a>
+        </li>
+        <li>
+            <a class="side-menu__item" href="{{ route('desa.page.index') }}"><i class="side-menu__icon" data-eva="shopping-cart-outline"></i><span class="side-menu__label">Page</span></a>
+        </li>
+        <li>
             <a class="side-menu__item" href="{{ route('desa.warga.index') }}"><i class="side-menu__icon" data-eva="layout-outline"></i><span class="side-menu__label">Daftar Masyarakat</span></a>
         </li>
         <li>

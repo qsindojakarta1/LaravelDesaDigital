@@ -12,6 +12,7 @@ use App\Models\JenisSurat;
 use App\Models\KategoriInformasi;
 use App\Models\Loket;
 use App\Models\Marque;
+use App\Models\Page;
 use App\Models\Playlist;
 use App\Models\Produk;
 use App\Models\Profile;
@@ -19,6 +20,7 @@ use App\Models\Rate;
 use App\Models\Rating;
 use App\Models\Sejarah;
 use App\Models\Slider;
+use App\Models\Tag;
 use App\Models\Visitor;
 use App\Models\Warga;
 use Carbon\Carbon;
@@ -68,6 +70,18 @@ class HomeController extends Controller
             return redirect()->route('home');
         }
         return view('landing.kategori', compact('desa', 'informasis', 'sliders', 'kategori_informasi'));
+    }
+    public function tag($id)
+    {
+        $desa = getDesaFromUrl();
+        $pages = Page::where('tag_id', $id)->latest()->paginate(12);
+        $sliders = Slider::where('desa_id', $desa->id)->get();
+        $tag = Tag::findOrFail($id);
+        if($tag->desa_id != $desa->id){
+            toast('akses tag dilarang','warning');
+            return redirect()->route('home');
+        }
+        return view('landing.tag', compact('desa', 'pages', 'sliders', 'tag'));
     }
     public function dokumen()
     {
@@ -220,6 +234,17 @@ class HomeController extends Controller
             return redirect()->route('home');
         }
         return view('landing.informasi',compact('informasi','desa'));
+    }
+    
+    public function pageShow($id)
+    {
+        $page = Page::findOrFail($id);
+        $desa = getDesaFromUrl();
+        if($page->desa_id != $desa->id){
+            toast('akses page dilarang','warning');
+            return redirect()->route('home');
+        }
+        return view('landing.page',compact('page','desa'));
     }
     public function search(Request $request)
     {

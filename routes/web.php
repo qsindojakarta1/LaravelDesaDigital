@@ -13,6 +13,7 @@ use App\Http\Controllers\Desa\InformasiController;
 use App\Http\Controllers\Desa\KategoriInformasiController;
 use App\Http\Controllers\Desa\LoketController;
 use App\Http\Controllers\Desa\MarqueController;
+use App\Http\Controllers\Desa\PageController;
 use App\Http\Controllers\Desa\PenggunaController;
 use App\Http\Controllers\Desa\PlaylistController;
 use App\Http\Controllers\Desa\ProdukController;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Desa\RateController;
 use App\Http\Controllers\Desa\RatingController;
 use App\Http\Controllers\Desa\SejarahController;
 use App\Http\Controllers\Desa\SliderController;
+use App\Http\Controllers\Desa\TagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Warga\MasyarakatController;
 use App\Models\Desa;
@@ -57,12 +59,15 @@ Route::domain(getDesaFromUrl()->sub_domain . '.' . env('APP_DOMAIN_URL'))->group
     Route::middleware('guest')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
         Route::post('search',[HomeController::class, 'search'])->name('search');
+        Route::post('searchOfPage',[HomeController::class, 'searchOfPage'])->name('searchOfPage');
         Route::get('/informasi/{id}', [HomeController::class, 'informasiShow'])->name('informasi.show');
+        Route::get('/page/{id}', [HomeController::class, 'pageShow'])->name('page.show');
         Route::get('/gallery', [HomeController::class, 'gallery'])->name('gallery');
         Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
         Route::get('/sejarah', [HomeController::class, 'sejarah'])->name('sejarah');
         Route::get('/dokumen', [HomeController::class, 'dokumen'])->name('dokumen');
         Route::get('/kategori/{id}', [HomeController::class, 'kategori'])->name('kategori');
+        Route::get('/tag/{id}', [HomeController::class, 'tag'])->name('tag');
         Route::get('/antrian', [HomeController::class, 'antrian'])->name('antrian');
         Route::post('/antrian', [HomeController::class, 'storeAntrian'])->name('antrian.store');
         Route::get('/aduan', [HomeController::class, 'aduan'])->name('aduan');
@@ -89,6 +94,8 @@ Route::domain(getDesaFromUrl()->sub_domain . '.' . env('APP_DOMAIN_URL'))->group
         });
 
         Route::prefix('desa')->name('desa.')->group(function () {
+            Route::resource('tag',TagController::class);
+            Route::resource('page',PageController::class);
             Route::resource('kategori_informasi', KategoriInformasiController::class);
             Route::resource('aduan', AduanController::class);
             Route::resource('pengguna', PenggunaController::class);

@@ -4,7 +4,8 @@
 <head>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
     <!-- ========== Start Stylesheet ========== -->
@@ -69,10 +70,13 @@
             <nav id="navbar_top" class="navbar navbar-expand-lg">
                 <div class="container g-0">
                     <a class="navbar-brand" href="index.html">
-                        <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('landing/assets/img/logo/logo.png') }}" class="logo-display" width="100" alt="thumb">
-                        <img src="{{ getDesaFromUrl()->dark_logo ? asset('storage/'.getDesaFromUrl()->dark_logo) : asset('landing/assets/img/logo/black-logo.png') }}" class="logo-scrolled" width="100" alt="thumb">
+                        <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('landing/assets/img/logo/logo.png') }}"
+                            class="logo-display" width="100" alt="thumb">
+                        <img src="{{ getDesaFromUrl()->dark_logo ? asset('storage/'.getDesaFromUrl()->dark_logo) : asset('landing/assets/img/logo/black-logo.png') }}"
+                            class="logo-scrolled" width="100" alt="thumb">
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_nav"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"><i class="ti-menu-alt"></i></span>
                     </button>
                     <div class="collapse navbar-collapse" id="main_nav">
@@ -81,7 +85,7 @@
 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                    Tentang
+                                    Laman
                                 </a>
                                 <ul class="dropdown-menu fade-up">
                                     <li>
@@ -94,14 +98,28 @@
                                             Sejarah
                                         </a>
                                     </li>
+                                    @forelse(App\Models\Page::where('desa_id',getDesaFromUrl()->id)->get() as $data)
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('page.show',$data->id) }}">
+                                            {{ $data->judul }}
+                                        </a>
+                                    </li>
+                                    @empty
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            tidak ada page di {{ getDesaFromUrl()->nama_desa }}
+                                        </a>
+                                    </li>
+                                    @endforelse
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                    Kategori
+                                    Informasi
                                 </a>
                                 <ul class="dropdown-menu fade-up">
-                                    @forelse(App\Models\KategoriInformasi::where('desa_id',getDesaFromUrl()->id)->get() as $data)
+                                    @forelse(App\Models\KategoriInformasi::where('desa_id',getDesaFromUrl()->id)->get()
+                                    as $data)
                                     <li>
                                         <a class="dropdown-item" href="{{ route('kategori',$data->id) }}">
                                             {{ $data->nama }}
@@ -122,9 +140,12 @@
                                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"> Statistik
                                 </a>
                                 <ul class="dropdown-menu fade-up">
-                                    <li><a class="dropdown-item" href="{{ route('statistik.pekerjaan') }}"> pekerjaan</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('statistik.jenis_kelamin') }}"> jenis kelamin</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('statistik.kelompok_umur') }}">kelompok umur</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('statistik.pekerjaan') }}">
+                                            pekerjaan</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('statistik.jenis_kelamin') }}"> jenis
+                                            kelamin</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('statistik.kelompok_umur') }}">kelompok
+                                            umur</a></li>
                                     <li><a class="dropdown-item" href="{{ route('statistik.agama') }}">agama</a></li>
                                 </ul>
                             </li>
@@ -180,10 +201,13 @@
                     <div class="footer-widget-box about-us">
                         <h4 class="footer-widget-title">Tentang {{ getDesaFromUrl()->nama_desa }}</h4>
                         <div class="footer-icon mb-20">
-                            <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('landing/assets/img/logo/logo.png') }}" width="100" alt="thumb">
+                            <img src="{{ getDesaFromUrl()->light_logo ? asset('storage/'.getDesaFromUrl()->light_logo) : asset('landing/assets/img/logo/logo.png') }}"
+                                width="100" alt="thumb">
                         </div>
                         <p class="mb-20">
-                            {{ getDesaFromUrl()->footer->tentang ?? 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore aperiam quisquam, distinctio dolore quis sunt ex id rerum ipsam explicabo sapiente totam adipisci nesciunt iste libero quia repellendus voluptatem ipsum!' }}
+                            {{ getDesaFromUrl()->footer->tentang ?? 'Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Tempore aperiam quisquam, distinctio dolore quis sunt ex id rerum ipsam explicabo
+                            sapiente totam adipisci nesciunt iste libero quia repellendus voluptatem ipsum!' }}
                         </p>
                         <div class="footer-adrs">
                             <ul>
@@ -216,7 +240,8 @@
                     <div class="footer-widget-box popular-course">
                         <h4 class="footer-widget-title">Informasi</h4>
                         <ul class="footer-course">
-                            @forelse(App\Models\Informasi::where('desa_id',getDesaFromUrl()->id)->latest()->take(3)->get() as $data)
+                            @forelse(App\Models\Informasi::where('desa_id',getDesaFromUrl()->id)->latest()->take(3)->get()
+                            as $data)
                             <li>
                                 <div class="footer-post d-flex align-items-center">
                                     <img src="{{ asset('storage/'.$data->thumbnail) }}" width="100" alt="thumb">
@@ -255,17 +280,22 @@
                                     <table>
                                         <tr>
                                             <th>pengunjung hari ini</th>
-                                            <th>{{ App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->whereDate('created_at',Carbon\Carbon::now()->format('Y-m-d'))->count() }}</th>
+                                            <th>{{
+                                                App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->whereDate('created_at',Carbon\Carbon::now()->format('Y-m-d'))->count()
+                                                }}</th>
                                         </tr>
                                         <tr>
                                             <th>pengunjung kemarin</th>
-                                            <th>{{ App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->whereDate('created_at',Carbon\Carbon::yesterday()->format('Y-m-d'))->count() }}</th>
+                                            <th>{{
+                                                App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->whereDate('created_at',Carbon\Carbon::yesterday()->format('Y-m-d'))->count()
+                                                }}</th>
                                         </tr>
                                         <tr>
                                             <th>total pengunjung</th>
-                                            <th>{{ App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->count() }}</th>
+                                            <th>{{ App\Models\Visitor::where('desa_id',getDesaFromUrl()->id)->count() }}
+                                            </th>
                                         </tr>
-                                    </table>    
+                                    </table>
 
                                 </div>
                             </div>

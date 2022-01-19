@@ -29,6 +29,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endguest
 </head>
+<style>
+    html {
+        scroll-behavior: smooth;
+    }
+</style>
 
 <body class="main-body app sidebar-mini">
     <!-- HEADER -->
