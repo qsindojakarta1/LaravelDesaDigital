@@ -41,6 +41,9 @@ class WargaFactory extends Factory
             'status_perkawinan_id' => random_int(1,StatusPerkawinan::count()),
             'suku_id' => random_int(1,Suku::count()),
             'golongan_darah_id' => random_int(1,GolonganDarah::count()),
+            'golongan_darah_id' => random_int(1,GolonganDarah::count()),
+            'golongan_darah_id' => random_int(1,GolonganDarah::count()),
+            'golongan_darah_id' => random_int(1,GolonganDarah::count()),
         ];
     }
 }

@@ -14,7 +14,7 @@ class PermohonanSuratController extends Controller
 {
     public function index()
     {
-        $permohonans = PermohonanSurat::where('desa_id', auth()->user()->desa_id)->get();
+        $permohonans = PermohonanSurat::where('desa_id', auth()->user()->desa_id)->latest()->get();
 
         return view('desa.permohonan.index', compact('permohonans'));
     }

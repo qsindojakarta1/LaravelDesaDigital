@@ -7,6 +7,7 @@ use App\Http\Controllers\Desa\WargaController;
 use App\Http\Controllers\Desa\AntrianController;
 use App\Http\Controllers\Desa\CetakSuratController;
 use App\Http\Controllers\Desa\DokumenController;
+use App\Http\Controllers\Desa\DusunController;
 use App\Http\Controllers\Desa\GalleryController;
 use App\Http\Controllers\Desa\PermohonanSuratController;
 use App\Http\Controllers\Desa\InformasiController;
@@ -92,8 +93,9 @@ Route::domain(getDesaFromUrl()->sub_domain . '.' . env('APP_DOMAIN_URL'))->group
 
         Route::prefix('kabupaten')->name('kabupaten.')->group(function () {
         });
-
+        
         Route::prefix('desa')->name('desa.')->group(function () {
+            Route::resource('dusun',DusunController::class);
             Route::resource('tag',TagController::class);
             Route::resource('page',PageController::class);
             Route::resource('kategori_informasi', KategoriInformasiController::class);

@@ -90,10 +90,15 @@ class LoketController extends Controller
 
     public function destroy(Loket $loket)
     {
-        $loket->delete();
-
-        Alert::success('Success!', 'Loket berhasil didelete');
-        return redirect()->route('desa.loket.index');
+        try {
+            $loket->delete();
+    
+            Alert::success('Success!', 'Loket berhasil didelete');
+            return redirect()->route('desa.loket.index');
+        } catch (\Throwable $th) {
+            Alert::warning('warning','loket tidak bisa di hapus *reset atau edit');
+            return back();
+        }
     }
 
     public function reset(Loket $loket)

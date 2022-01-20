@@ -19,9 +19,9 @@ class AntrianController extends Controller
         $to = $request->to;
 
         if ($from && $to) {
-            $antrians = Antrian::where('desa_id', auth()->user()->desa_id)->whereBetween('tanggal_antri', [$from, $to])->get();
+            $antrians = Antrian::where('desa_id', auth()->user()->desa_id)->whereBetween('tanggal_antri', [$from, $to])->latest()->get();
         } else {
-            $antrians = Antrian::where('desa_id', auth()->user()->desa_id)->where('tanggal_antri', now()->format('Y-m-d'))->get();
+            $antrians = Antrian::where('desa_id', auth()->user()->desa_id)->where('tanggal_antri', now()->format('Y-m-d'))->latest()->get();
         }
 
         $loket = Loket::where('desa_id', auth()->user()->desa_id)->get();

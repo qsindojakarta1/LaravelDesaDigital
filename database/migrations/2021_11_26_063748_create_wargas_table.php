@@ -32,6 +32,9 @@ class CreateWargasTable extends Migration
             $table->foreignId('status_perkawinan_id')->constrained('status_perkawinans');
             $table->foreignId('suku_id')->constrained('sukus');
             $table->foreignId('golongan_darah_id')->constrained('golongan_darahs');
+            $table->foreignId('dusun_id')->nullable();
+            $table->foreignId('rw_id')->nullable();
+            $table->foreignId('rt_id')->nullable();
             $table->timestamps();
         });
     }
