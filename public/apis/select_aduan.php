@@ -29,7 +29,9 @@ on
 wargas.kecamatan_id = kecamatans.id		
 left join kabupatens
 on
-wargas.kabupaten_id = kabupatens.id");
+wargas.kabupaten_id = kabupatens.id
+order by aduans.id desc
+");
 $data = array();
 $qry_array = array();
 $i = 0;
