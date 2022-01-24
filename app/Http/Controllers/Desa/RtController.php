@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Desa;
 
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
+use App\Models\Rt;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class ProfileController extends Controller
+class RtController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -36,7 +38,15 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $this->validate($request, [
+            'rt' => 'required',
+            'ketua_rt_id' => 'required',
+            'rw_id' => 'required'
+        ]);
+        Rt::create($attr);
+
+        Alert::success('success');
+        return back();
     }
 
     /**
@@ -58,19 +68,11 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        if (!Profile::where('desa_id', $id)->exists()) {
-            Profile::create([
-                'desa_id' => getDesaFromUrl()->id
-            ]);
-        }
-        if (Profile::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
-            toast('akses dilarang', 'warning');
-            return back();
-        }
-        $profile = Profile::where('desa_id', $id)->firstOrFail();
-        return view('desa.profile.edit', [
-            'profile' => $profile
-        ]);
+
+        $rt = Rt::find($id);
+        $wargas = Warga::where('desa_id', getDesaFromUrl()->id)->get();
+
+        return view('desa.rt.edit', compact('rt', 'wargas'));
     }
 
     /**
@@ -82,17 +84,14 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        if (Profile::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
-            toast('akses dilarang', 'warning');
-            return back();
-        }
-        $attr = $this->validate($request, [
-            'judul' => 'required',
-            'content' => 'required'
-        ]);
 
-        Profile::findOrFail($id)->update($attr);
+
+        $attr = $this->validate($request, [
+            'rt' => 'required',
+            'ketua_rt_id' => 'required'
+        ]);
+        Rt::find($id)->update($attr);
+
         Alert::success('success');
         return back();
     }
@@ -105,6 +104,14 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        try {
+            Rt::findOrFail($id)->delete();
+            Alert::success('success');
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error($th->getMessage());
+            return back();
+        }
     }
 }

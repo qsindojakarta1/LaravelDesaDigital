@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Desa;
 
 use App\Http\Controllers\Controller;
-use App\Models\Profile;
+use App\Models\Rt;
+use App\Models\Rw;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class ProfileController extends Controller
+class RwController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +18,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -36,7 +39,15 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attr = $this->validate($request,[
+            'rw' => 'required',
+            'ketua_rw_id' => 'required',
+            'dusun_id' => 'required'
+        ]);
+        Rw::create($attr);
+
+        Alert::success('success');
+        return back();
     }
 
     /**
@@ -47,7 +58,11 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $rt = new Rt();
+        $rw = Rw::findOrFail($id);
+        $rts = Rt::where('rw_id',$id)->get();
+        $wargas = Warga::where('desa_id',getDesaFromUrl()->id)->get();
+        return view('desa.rw.show',compact('rw','rts','wargas','rt'));
     }
 
     /**
@@ -58,19 +73,10 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        if (!Profile::where('desa_id', $id)->exists()) {
-            Profile::create([
-                'desa_id' => getDesaFromUrl()->id
-            ]);
-        }
-        if (Profile::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
-            toast('akses dilarang', 'warning');
-            return back();
-        }
-        $profile = Profile::where('desa_id', $id)->firstOrFail();
-        return view('desa.profile.edit', [
-            'profile' => $profile
-        ]);
+        $rw = Rw::find($id);
+        $wargas = Warga::where('desa_id',getDesaFromUrl()->id)->get();
+        
+        return view('desa.rw.edit',compact('rw','wargas'));
     }
 
     /**
@@ -83,16 +89,12 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         
-        if (Profile::where('desa_id', $id)->firstOrFail()->desa_id != getDesaFromUrl()->id) {
-            toast('akses dilarang', 'warning');
-            return back();
-        }
-        $attr = $this->validate($request, [
-            'judul' => 'required',
-            'content' => 'required'
+        $attr = $this->validate($request,[
+            'rw' => 'required',
+            'ketua_rw_id' => 'required'
         ]);
+        Rw::find($id)->update($attr);
 
-        Profile::findOrFail($id)->update($attr);
         Alert::success('success');
         return back();
     }
@@ -105,6 +107,13 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Rw::findOrFail($id)->delete();
+            Alert::success('success');
+            return back();
+        } catch (\Throwable $th) {
+            Alert::error($th->getMessage());
+            return back();
+        }
     }
 }

@@ -62,6 +62,9 @@ class WargaController extends Controller
             'pendidikan_id' => 'required',
             'status_perkawinan_id' => 'required',
             'golongan_darah_id' => 'required',
+            'dusun_id' => 'required',
+            'rw_id' => 'required',
+            'rt_id' => 'required'
         ]);
         try {
             Warga::create($attr);
@@ -122,8 +125,15 @@ class WargaController extends Controller
             'pendidikan_id' => 'required',
             'status_perkawinan_id' => 'required',
             'golongan_darah_id' => 'required',
+            'dusun_id' => 'required',
         ]);
         try {
+            if($request->rw_id){
+                $attr['rw_id'] = $request->rw_id;
+            }
+            if($request->rt_id){
+                $attr['rt_id'] = $request->rt_id;
+            }
             Warga::findOrFail($id)->update($attr);
             Alert::success('success');
             return back();

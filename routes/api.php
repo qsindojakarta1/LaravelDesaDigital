@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\SuratController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Models\Desa;
+use App\Models\Rt;
+use App\Models\Rw;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +72,14 @@ Route::post('umur',[DevController::class,'umur']);
 Route::post('dusun',[DevController::class,'dusun']);
 Route::post('jenis_kelamin',[DevController::class,'jeniskelamin']);
 
+Route::get('/dusun/{id}',function($id){
+    $rw = Rw::where('dusun_id',$id)->get();
+    return response()->json($rw);
+});
+Route::get('/rw/{id}',function($id){
+    $rt = Rt::where('rw_id',$id)->get();
+    return response()->json($rt);
+});
 Route::get('/desa/{id}',function($id){
     $desa = Desa::find($id);
     $responses = [

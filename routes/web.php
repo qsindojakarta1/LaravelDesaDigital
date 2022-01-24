@@ -21,6 +21,8 @@ use App\Http\Controllers\Desa\ProdukController;
 use App\Http\Controllers\Desa\ProfileController;
 use App\Http\Controllers\Desa\RateController;
 use App\Http\Controllers\Desa\RatingController;
+use App\Http\Controllers\Desa\RtController;
+use App\Http\Controllers\Desa\RwController;
 use App\Http\Controllers\Desa\SejarahController;
 use App\Http\Controllers\Desa\SliderController;
 use App\Http\Controllers\Desa\TagController;
@@ -50,11 +52,16 @@ Route::get('/execute', function () {
     Artisan::call('db:seed');
 });
 
+Route::get('me',function(){
+    dd(request());
+});
+
 Auth::routes(['verify' => true]);
 
 Route::get('apib/login', [App\Http\Controllers\Apib\AuthController::class, 'login'])->name('apib.login');
 Route::get('apib/aduan', [App\Http\Controllers\Apib\AuthController::class, 'aduan'])->name('apib.aduan');
 Route::get('apib/datas', [App\Http\Controllers\Apib\AuthController::class, 'datas'])->name('apib.datas');
+
 
 Route::domain(getDesaFromUrl()->sub_domain . '.' . env('APP_DOMAIN_URL'))->group(function () {
     Route::middleware('guest')->group(function () {
@@ -95,6 +102,8 @@ Route::domain(getDesaFromUrl()->sub_domain . '.' . env('APP_DOMAIN_URL'))->group
         });
         
         Route::prefix('desa')->name('desa.')->group(function () {
+            Route::resource('rt',RtController::class);
+            Route::resource('rw',RwController::class);
             Route::resource('dusun',DusunController::class);
             Route::resource('tag',TagController::class);
             Route::resource('page',PageController::class);

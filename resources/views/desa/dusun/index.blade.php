@@ -19,6 +19,8 @@
                                 <th>No.</th>
                                 <th>nama dusun</th>
                                 <th>ketua dusun</th>
+                                <th>rw</th>
+                                <th>rt</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -28,6 +30,16 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->nama_dusun }}</td>
                                 <th>{{ $data->ketua_dusun->nama_warga }}</th>
+                                <th>
+                                    {{ $data->rw->count() }}
+                                </th>
+                                <th>
+                                    @php $me = 0 @endphp
+                                    @foreach ($data->rw as $rw)
+                                        @php $me += $rw->rt->count() @endphp
+                                    @endforeach
+                                    {{ $me }}
+                                </th>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{{ route('desa.dusun.show',$data->id) }}" class="btn btn-sm btn-success"><i class="fas fa-eye"></i> Show</a>

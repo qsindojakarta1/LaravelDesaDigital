@@ -47,7 +47,7 @@
             <a class="side-menu__item" href="{{  route('desa.loket.index') }}"><i class="side-menu__icon" data-eva="home-outline"></i><span class="side-menu__label">Loket</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{  route('desa.antrian.index') }}"><i class="side-menu__icon" data-eva="speaker-outline"></i><span class="side-menu__label d-flex justify-content-between"><div>Antrian</div> <div>{{ App\Models\Loket::where('desa_id',getDesaFromUrl()->id)->pluck('kuota')->first() ?? 'Kosong' }}</div></span></a>
+            <a class="side-menu__item" href="{{  route('desa.antrian.index') }}"><i class="side-menu__icon" data-eva="speaker-outline"></i><span class="side-menu__label d-flex justify-content-between"><div>Antrian</div><div>{{ App\Models\Antrian::where('tanggal_antri',now()->format('Y-m-d'))->where('status',0)->count() }}</div> </span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.permohonan.index') }}"><i class="side-menu__icon" data-eva="email-outline"></i><span class="side-menu__label">Permohonan Surat</span></a>
@@ -66,10 +66,10 @@
         </li>
 
         <li>
-            <a class="side-menu__item" href="{{ route('desa.tag.index') }}"><i class="side-menu__icon" data-eva="layout-outline"></i><span class="side-menu__label">Tag</span></a>
+            <a class="side-menu__item" href="{{ route('desa.tag.index') }}"><i class="side-menu__icon" data-eva="hash-outline"></i><span class="side-menu__label">Tag</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.page.index') }}"><i class="side-menu__icon" data-eva="shopping-cart-outline"></i><span class="side-menu__label">Page</span></a>
+            <a class="side-menu__item" href="{{ route('desa.page.index') }}"><i class="side-menu__icon" data-eva="browser-outline"></i><span class="side-menu__label">Page</span></a>
         </li>
         <li>
             <a class="side-menu__item" href="{{ route('desa.warga.index') }}"><i class="side-menu__icon" data-eva="layout-outline"></i><span class="side-menu__label">Daftar Masyarakat</span></a>
@@ -114,7 +114,7 @@
             <a class="side-menu__item" href="{{ route('desa.sejarah.edit',getDesaFromUrl()->id) }}"><i class="side-menu__icon" data-eva="info-outline"></i><span class="side-menu__label">Sejarah</span></a>
         </li>
         <li>
-            <a class="side-menu__item" href="{{ route('desa.dusun.index') }}"><i class="side-menu__icon" data-eva="info-outline"></i><span class="side-menu__label">dusun</span></a>
+            <a class="side-menu__item" href="{{ route('desa.dusun.index') }}"><i class="side-menu__icon" data-eva="map-outline"></i><span class="side-menu__label">Dusun</span></a>
         </li>
 
         <li>

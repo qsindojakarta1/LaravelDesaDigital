@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Dusun Show')
+@section('title', 'rw Show')
 @push('bread')
-<li class="breadcrumb-item"><a href="{{ route('desa.dusun.index') }}">Dusun</a></li>
+<li class="breadcrumb-item"><a href="{{ route('desa.rt.index') }}">rw</a></li>
 <li class="breadcrumb-item active">Show</li>
 @endpush
 @section('content')
@@ -14,26 +14,22 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>rw</th>
-                                <th>ketua rw</th>
                                 <th>rt</th>
+                                <th>ketua rt</th>
                                 <th>action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($rws as $rw)
+                            @foreach ($rts as $rt)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $rw->rw }}</td>
-                                <td>{{ $rw->ketua_rw->nama_warga }}</td>
-                                <td>{{ $rw->rt->count() }}</td>
+                                <td>{{ $rt->rt }}</td>
+                                <td>{{ $rt->ketua_rt->nama_warga }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-sm btn-success"
-                                            href="{{ route('desa.rw.show',$rw->id) }}">show</a>
                                         <a class="btn btn-sm btn-warning"
-                                            href="{{ route('desa.rw.edit',$rw->id) }}">edit</a>
-                                        <form action="{{ route('desa.rw.destroy',$rw->id) }}" method="post">
+                                            href="{{ route('desa.rt.edit',$rt->id) }}">edit</a>
+                                        <form action="{{ route('desa.rt.destroy',$rt->id) }}" method="post">
                                             @csrf
                                             @method('delete')
                                             <button class="btn btn-sm btn-danger">delete</button>
@@ -52,35 +48,35 @@
         <div class="card">
             <div class="card-body">
                 <div>
-                    <form action="{{ route('desa.rw.store') }}" method="post">
+                    <form action="{{ route('desa.rt.store') }}" method="post">
                         @csrf
                         @method('post')
-                        <input type="hidden" name="dusun_id" value="{{ $dusun->id }}">
+                        <input type="hidden" name="rw_id" value="{{ $rw->id }}">
                         <div class="form-group">
-                            <label for="">rw</label>
-                            <input type="text" name="rw"
-                                class="form-control @error('rw') is-invalid @enderror">
-                            @error('rw')
+                            <label for="">rt</label>
+                            <input type="text" name="rt"
+                                class="form-control @error('rt') is-invalid @enderror">
+                            @error('rt')
                             <span class="invalid-feedback">
                                 {{ $message }}
                             </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">ketua rw id</label>
-                            <select class="form-control @error('ketua_rw_id') is-invalid @enderror"
-                             name="ketua_rw_id" id="">
+                            <label for="">ketua rt id</label>
+                            <select class="form-control @error('ketua_rt_id') is-invalid @enderror"
+                             name="ketua_rt_id" id="">
                                 @foreach ($wargas as $warga)
                                 <option value="{{ $warga->id }}">{{ $warga->nama_warga }}</option>
                                 @endforeach
                             </select>
-                            @error('ketua_rw_id')
+                            @error('ketua_rt_id')
                             <span class="invalid-feedback">
                                 {{ $message }}
                             </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-sm btn-primary">store</button>
+                        <button type="submit" class="btn btn-sm btn-secondary">store</button>
                     </form>
                 </div>
             </div>

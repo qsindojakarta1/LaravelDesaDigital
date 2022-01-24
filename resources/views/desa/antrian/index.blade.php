@@ -13,14 +13,25 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header">
-                Jumlah antrian hari ini
+            <div class="card-header font-bold">
+                <strong>Jumlah antrian hari ini : {{
+                    App\Models\Antrian::where('tanggal_antri',now()->format('Y-m-d'))->where('status',0)->count()
+                    }}</strong>
             </div>
 
             <div class="card-body">
                 <ul class="list-group">
                     @foreach($loket as $lkt)
-                    <li class="list-group-item justify-content-between">Loket {{ $lkt->nama }} <span class="badgetext badge badge-primary badge-pill">{{ $lkt->antrian()->where('tanggal_antri', now()->format('Y-m-d'))->count() }}</span> </li>
+                    <li class="list-group-item justify-content-between">
+                        <div>
+                            Loket {{ $lkt->nama }}
+                        </div>
+                        <div>
+                            <span class="badgetext badge badge-success badge-pill">{{ $lkt->kuota }}</span>
+                            <span class="badgetext badge badge-primary badge-pill">{{
+                                $lkt->antrian()->where('tanggal_antri', now()->format('Y-m-d'))->count() }}</span>
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
             </div>
@@ -32,17 +43,21 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title">Antrian Tanggal : {{ request('from') && request('to') ? request('from') . ' s/d '. request('to') : now('Asia/Jakarta')->format('d/m/Y') }}</h5>
+                <h5 class="card-title">Antrian Tanggal : {{ request('from') && request('to') ? request('from') . ' s/d
+                    '. request('to') : now('Asia/Jakarta')->format('d/m/Y') }}</h5>
             </div>
             <div class="card-header d-flex flex-row justify-content-between">
-                <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline-info"><i class="fas fa-arrow-left"></i> Back</a>
-                <a href="{{ route('desa.antrian.create') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-plus"></i> Create New</a>
+                <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline-info"><i class="fas fa-arrow-left"></i>
+                    Back</a>
+                <a href="{{ route('desa.antrian.create') }}" class="btn btn-sm btn-outline-primary"><i
+                        class="fas fa-plus"></i> Create New</a>
             </div>
             <div class="card-body">
                 <form action="" method="get" class="mb-3">
                     <div class="row">
                         <div class="col-md-4">
-                            <input type="date" name="from" id="from" class="form-control" value="{{ request('from') ?? '' }}">
+                            <input type="date" name="from" id="from" class="form-control"
+                                value="{{ request('from') ?? '' }}">
                         </div>
                         <div class="col-md-4">
                             <input type="date" name="to" id="to" class="form-control" value="{{ request('to') ?? '' }}">
@@ -93,16 +108,21 @@
                                 <td>
                                     <div class="btn-group group-{{ $antrian->id }}">
                                         @if($antrian->status == 0 )
-                                        <button type="button" data-antri="{{ $antrian->no_antrian }}" data-loket="{{ $antrian->loket->id }}" id="{{ $antrian->id }}" class="btn btn-sm btn-outline-success btn-play play-{{ $antrian->id }}">Panggil</button>
+                                        <button type="button" data-antri="{{ $antrian->no_antrian }}"
+                                            data-loket="{{ $antrian->loket->id }}" id="{{ $antrian->id }}"
+                                            class="btn btn-sm btn-outline-success btn-play play-{{ $antrian->id }}">Panggil</button>
                                         @endif
                                         @if($antrian->status == 1)
-                                        <a href="{{ route('desa.antrian.status', $antrian->id) }}" class="btn btn-sm btn-outline-success">Konfirmasi</a>
+                                        <a href="{{ route('desa.antrian.status', $antrian->id) }}"
+                                            class="btn btn-sm btn-outline-success">Konfirmasi</a>
                                         @endif
-                                        <a href="{{ route('desa.antrian.edit', $antrian->id) }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
+                                        <a href="{{ route('desa.antrian.edit', $antrian->id) }}"
+                                            class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i> Edit</a>
                                         <form action="{{ route('desa.antrian.destroy', $antrian->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-sm btn-outline-danger delete_confirm" type="submit"><i class="fas fa-trash"></i> Delete</button>
+                                            <button class="btn btn-sm btn-outline-danger delete_confirm"
+                                                type="submit"><i class="fas fa-trash"></i> Delete</button>
                                         </form>
                                     </div>
                                 </td>

@@ -17,4 +17,8 @@ class Dusun extends Model
     {
         return $this->belongsTo(Warga::class,'ketua_dusun_id');
     }
+    public function rw()
+    {
+        return $this->hasMany(Rw::class);
+    }
 }
